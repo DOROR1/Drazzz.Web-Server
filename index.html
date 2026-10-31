@@ -6,225 +6,29 @@
 <meta name="theme-color" content="#000000">
 <title>Drazzz. | Portofolio</title>
 <meta name="description" content="Portofolio Drazzz.: desain Canva dan konten showcase Zenless Zone Zero.">
-<style>
-@font-face{font-family:ZZZ;src:url(assets/fonts/Zenless_Font.ttf);font-display:swap}
-@font-face{font-family:Raj;src:url(assets/fonts/Rajdhani-Bold.ttf);font-weight:700;font-display:swap}
-@font-face{font-family:Script;src:url(assets/fonts/Parisienne-Regular.ttf);font-display:swap}
-@font-face{font-family:Arimo;src:url(assets/fonts/Arimo-VariableFont.ttf);font-weight:100 700;font-display:swap}
-
-@property --red{syntax:"<color>";inherits:true;initial-value:#ff2a55}
-:root{transition:--red .6s ease;--bg:#050505;--card:#0e0e0e;--line:#2b2b2b;--w:#f4f1ef;--mut:#b5b0ae;--red:#ff2a55;--redd:#c4143a}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
-body{font:1rem/1.6 Arimo,system-ui,sans-serif;color:var(--w);background:var(--bg);padding-bottom:5.5rem}
-img{display:block;max-width:100%}
-a{color:inherit}
-button{font:inherit;color:inherit;cursor:pointer}
-:focus-visible{outline:3px solid var(--w);outline-offset:3px}
-.wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem}
-.sec{padding:3rem 0 0;scroll-margin-top:1rem}
-.panel{border:3px solid var(--line);border-radius:28px 6px 28px 6px;background:var(--card);overflow:hidden}
-
-/* latar animasi ala ZZZ: garis diagonal + teks banner bergeser */
-.bg{position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(ellipse at 85% 0,color-mix(in srgb,var(--red) 22%,transparent),transparent 55%),
-  linear-gradient(135deg,#121212 25%,transparent 25% 50%,#121212 50% 75%,transparent 75%) 0 0/44px 44px}
-.bg::after{content:"";position:absolute;inset:0;background:url(assets/img/banner.webp) 0 0/900px auto;opacity:.045}
-@media(prefers-reduced-motion:no-preference){
-  .bg{animation:stripe 3s linear infinite}
-  .bg::after{animation:slide 40s linear infinite}
-  @keyframes stripe{to{background-position:0 0,44px 44px}}
-  @keyframes slide{to{background-position:900px 0}}
-}
-
-h2{display:flex;align-items:center;gap:1rem;font:700 clamp(2rem,5vw,3.2rem)/1 ZZZ,sans-serif;letter-spacing:-.03em;margin-bottom:1.5rem}
-h2::after{content:"";flex:1;height:3px;background:var(--line);min-width:2rem}
-.tag{order:1;font:700 1.15rem Raj,sans-serif;letter-spacing:0;background:var(--red);color:#000;padding:.15rem 1.4rem .15rem .9rem;clip-path:polygon(0 0,100% 0,85% 100%,0 100%)}
-
-/* HERO */
-.hero{display:grid;grid-template-columns:1fr 1.15fr;gap:1.25rem;padding-top:1.25rem;min-height:min(80vh,640px);align-items:center}
-.copy{display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:1rem;padding-bottom:.5rem}
-.chip{font:700 1.05rem Raj,sans-serif;background:var(--red);color:#000;padding:.15rem .9rem;border-radius:4px 12px 4px 12px}
-h1{font:700 clamp(2.8rem,9vw,7rem)/.9 ZZZ,sans-serif;letter-spacing:-.045em;text-transform:uppercase}
-.script{font:clamp(2rem,4vw,2.9rem)/1 Script,cursive;color:var(--red);rotate:-4deg;margin:-.5rem 0 0 .4rem}
-.lead{max-width:46ch;color:var(--mut)}
-.btns{display:flex;flex-wrap:wrap;gap:.8rem}
-.btn{display:inline-block;font:700 1.1rem Raj,sans-serif;padding:.6rem 1.3rem;border:3px solid var(--w);border-radius:14px 4px 14px 4px;background:transparent;text-decoration:none;transition:background .15s,color .15s}
-.btn:hover{background:var(--w);color:#000}
-.btn.p{background:var(--red);border-color:var(--red);color:#000}
-.btn.p:hover{background:var(--w);border-color:var(--w)}
-.art{position:relative;aspect-ratio:5/4;border-color:var(--red);background:radial-gradient(circle at 70% 40%,color-mix(in srgb,var(--red) 40%,transparent),#0a0a0a 72%)}
-.vbg{position:absolute;inset:-60%;background:url(assets/img/banner_hd.webp) 0 0/1000px auto;opacity:.22;rotate:-32deg}
-.ellen{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;scale:1.05;translate:var(--px,0) var(--py,0);transition:translate .3s ease-out,opacity .25s}
-@media(prefers-reduced-motion:no-preference){
-  .vbg{animation:vslide 18s linear infinite}
-  .ellen{animation:float 6s ease-in-out infinite}
-  @keyframes vslide{to{background-position:1000px 0}}
-  @keyframes float{50%{transform:translateY(-14px) rotate(.8deg)}}
-}
-
-/* TENTANG */
-.two{display:grid;grid-template-columns:1.2fr 1fr;gap:1.25rem}
-.about{padding:1.75rem}
-.about p{max-width:60ch}
-.about p+p{margin-top:1rem}
-.skills{list-style:none;display:grid;gap:1.1rem;align-content:center;padding:1.75rem;border-color:var(--red)}
-.skills b{display:block;font:700 1.35rem Raj,sans-serif;color:var(--red)}
-.skills span{font-size:.95rem;color:var(--mut)}
-
-/* SHOWCASE */
-.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:1.5rem}
-.mode{position:relative;min-height:220px;padding:1.2rem;text-align:left;background:#000;border:3px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .2s}
-.mode img{position:absolute;right:0;bottom:0;width:66%;height:100%;object-fit:cover;clip-path:polygon(40% 0,100% 0,100% 100%,0 100%);filter:grayscale(.8) brightness(.7);transition:filter .3s}
-.mode span,.mode small{position:relative;display:block}
-.mode span{font:700 clamp(1.8rem,3.4vw,2.7rem)/1 Raj,sans-serif;text-transform:uppercase;max-width:60%}
-.mode small{margin-top:.5rem;color:var(--mut)}
-.mode:hover,.mode[aria-pressed=true]{border-color:var(--red)}
-.mode:hover img,.mode[aria-pressed=true] img{filter:none}
-.mode[aria-pressed=true] span{color:var(--red)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.1rem}
-.th{padding:0;text-align:left;background:var(--card);border:3px solid var(--line);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}
-.th img{width:100%;aspect-ratio:3/4;object-fit:cover}
-.th span{display:block;padding:.5rem .7rem;font:700 1rem/1.2 Raj,sans-serif}
-.th:hover{transform:translate(-3px,-3px);border-color:var(--red);box-shadow:6px 6px 0 var(--red)}
-dialog{margin:auto;max-width:min(92vw,520px);max-height:92vh;padding:0;border:3px solid var(--red);border-radius:18px;background:var(--card);color:var(--w);overflow:auto}
-dialog::backdrop{background:rgba(0,0,0,.85)}
-dialog img{width:100%}
-dialog p{padding:.9rem 1.1rem;font:700 1.2rem Raj,sans-serif}
-dialog button{position:absolute;right:.6rem;top:.6rem;background:#000;border:2px solid var(--w);border-radius:8px;padding:.1rem .7rem;font:700 1.1rem Raj,sans-serif}
-
-/* BUILD */
-.tabs{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.25rem}
-.tab{width:84px;padding:.3rem;background:var(--card);border:3px solid var(--line);border-radius:12px 4px 12px 4px;text-align:center;font:700 .85rem/1.1 Raj,sans-serif;transition:border-color .2s,transform .2s}
-.tab img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;margin-bottom:.25rem}
-.tab{position:relative}
-.tab i{position:absolute;top:.5rem;left:.5rem;font:700 .7rem/1.2 Raj,sans-serif;font-style:normal;background:var(--red);color:#000;padding:0 .3rem;border-radius:3px}
-.mw.w{background:transparent;color:var(--red);box-shadow:inset 0 0 0 2px var(--red)}
-.tab:hover{transform:translateY(-3px)}
-.tab[aria-pressed=true]{border-color:var(--red);color:var(--red)}
-.bview{display:grid;gap:1.1rem;padding:1.25rem;border-color:var(--red)}
-.bhead{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem}
-.bhead h3{font:700 clamp(1.6rem,4vw,2.2rem)/1 ZZZ,sans-serif;letter-spacing:-.03em}
-.mw{background:var(--red);color:#000;font:700 1.2rem Raj,sans-serif;padding:0 .8rem;border-radius:4px 10px 4px 10px}
-.eng{display:flex;align-items:center;gap:.7rem;margin-left:auto;padding:.4rem 1rem .4rem .4rem;border:3px solid var(--line);border-radius:14px 4px 14px 4px;background:#000}
-.eng img{width:52px;height:52px;border-radius:10px}
-.eng small{display:block;color:var(--mut);font-size:.8rem;line-height:1.2}
-.eng b{font:700 1.2rem/1.1 Raj,sans-serif}
-.sets{display:flex;flex-wrap:wrap;gap:.5rem}
-.sets span{font:700 1rem Raj,sans-serif;border:2px solid var(--red);color:var(--red);padding:0 .75rem;border-radius:4px 10px 4px 10px}
-.stats{display:grid;grid-template-columns:1fr 1fr;border:3px solid var(--line);border-radius:18px 6px 18px 6px;overflow:hidden;background:#080808}
-.sr{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.55rem .95rem;color:var(--mut);font-size:.95rem}
-.sr:nth-child(4n+3),.sr:nth-child(4n+4){background:#131313}
-.sr b{font:700 1.35rem/1 Raj,sans-serif;color:var(--w);text-align:right;white-space:nowrap}
-.sr b small{display:block;font:700 .8rem/1.1 Raj,sans-serif;color:var(--mut)}
-.sr b em{font-style:normal;color:#b6f23a;margin-left:.3rem}
-.eff{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;color:var(--mut)}
-.eff b{font:700 1.3rem Raj,sans-serif;color:var(--red)}
-.chips{display:flex;flex-wrap:wrap;gap:.4rem}
-.chips span{font:700 .9rem Raj,sans-serif;color:var(--w);background:#1b1b1b;padding:.05rem .65rem;border-radius:4px 10px 4px 10px}
-.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.dc{background:#000;border:3px solid var(--line);border-radius:18px 6px 18px 6px;overflow:hidden;transition:border-color .2s,transform .2s}
-.dc:hover{border-color:var(--red);transform:translateY(-3px)}
-.dh{display:flex;align-items:center;gap:.7rem;padding:.7rem;background:linear-gradient(100deg,#1a1a1a 55%,color-mix(in srgb,var(--red) 28%,#000))}
-.hex{flex:none;width:44px;height:44px;display:grid;place-items:center;background:var(--red);color:#000;font:700 1.15rem Raj,sans-serif;clip-path:polygon(25% 6%,75% 6%,100% 50%,75% 94%,25% 94%,0 50%)}
-.dh b{display:block;font:700 1.15rem/1.1 Raj,sans-serif}
-.dh small{color:var(--mut);font-size:.8rem}
-.dh img{width:54px;height:54px;margin-left:auto;border-radius:50%}
-.dm{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;padding:.55rem .9rem;border-left:5px solid var(--red);background:color-mix(in srgb,var(--red) 10%,#000);font:700 1.1rem Raj,sans-serif}
-.dm em{font:700 1.6rem/1 ZZZ,sans-serif;font-style:normal;letter-spacing:-.03em}
-.ds{list-style:none;padding:.3rem .9rem .6rem}
-.ds li{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.35rem 0;border-bottom:1px solid #1d1d1d;font-size:.92rem;color:var(--mut)}
-.ds li:last-child{border:0}
-.ds i{font:700 .8rem Raj,sans-serif;font-style:normal;background:var(--red);color:#000;padding:0 .4rem;border-radius:3px;margin-left:.45rem}
-.ds b{font:700 1.05rem Raj,sans-serif;color:var(--w)}
-@media(max-width:900px){.dgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.dgrid,.stats{grid-template-columns:1fr}.eng{margin-left:0}.sr:nth-child(n){background:none}.sr:nth-child(even){background:#131313}}
-[hidden]{display:none!important}
-dialog .btn{margin:0 1.1rem 1.1rem}
-
-/* PROYEK */
-.steps{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;counter-reset:s}
-.steps li{counter-increment:s;padding:1.1rem;border:3px solid var(--line);border-radius:20px 6px 20px 6px;background:var(--card)}
-.steps li::before{content:counter(s,decimal-leading-zero);display:block;font:700 2.6rem/1 ZZZ,sans-serif;letter-spacing:-.04em;color:var(--red);margin-bottom:.6rem}
-.steps b{display:block;font:700 1.25rem/1.1 Raj,sans-serif;margin-bottom:.3rem}
-.steps p{font-size:.92rem;line-height:1.45;color:var(--mut)}
-.steps li:last-child{background:var(--red);border-color:var(--red);color:#000}
-.steps li:last-child::before,.steps li:last-child p{color:#000}
-
-/* KONTAK */
-.contact{display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center;padding:2rem;border-color:var(--red)}
-.contact h3{font:700 clamp(1.8rem,5vw,3.2rem)/1 ZZZ,sans-serif;letter-spacing:-.03em;margin-bottom:.4rem}
-.contact p{color:var(--mut)}
-footer{max-width:1180px;margin:0 auto;padding:1.5rem 1.25rem 0;font-size:.85rem;color:#8a8582}
-
-/* NAV BAWAH */
-.nav{position:fixed;inset:auto 0 0 0;display:flex;align-items:center;gap:1.2rem;background:#000;border-top:3px solid var(--red);
-  padding:.6rem 1.25rem calc(.6rem + env(safe-area-inset-bottom,0px));font:700 1.05rem Raj,sans-serif;z-index:5}
-.nav img{height:34px;width:auto}
-.sig{display:flex;align-items:center;gap:.7rem;font-size:.8rem;color:var(--red);white-space:nowrap}
-.nav ul{display:flex;gap:.3rem;list-style:none;margin:0 auto;overflow-x:auto}
-.nav li a{display:block;padding:.2rem .8rem;text-decoration:none;border-radius:4px;white-space:nowrap}
-.nav li a:hover{background:#222}
-.nav li a.on{background:var(--red);color:#000}
-.yr{color:var(--red)}
-
-/* LOADING */
-#load{position:fixed;inset:0;z-index:99;display:grid;place-items:center;overflow:hidden;background:#000 linear-gradient(135deg,#121212 25%,transparent 25% 50%,#121212 50% 75%,transparent 75%) 0 0/44px 44px;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
-#load.out{animation:shutter .8s cubic-bezier(.7,0,.2,1) forwards;pointer-events:none}
-@keyframes shutter{60%{clip-path:polygon(0 0,75% 0,45% 100%,0 100%)}to{clip-path:polygon(0 0,0 0,0 100%,0 100%)}}
-#load .lw{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.28}
-#load::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 100% 100%,color-mix(in srgb,var(--red) 35%,transparent),transparent 60%)}
-.lc{position:relative;z-index:1;width:min(88vw,560px);display:grid;gap:1.1rem}
-.lt{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}
-.num{font:700 clamp(4.5rem,16vw,8rem)/.8 ZZZ,sans-serif;letter-spacing:-.06em}
-.num small{font-size:.4em;color:var(--red);letter-spacing:0}
-.lt .logo{height:clamp(64px,14vw,104px);width:auto}
-.lc .lg{filter:invert(1);width:70%}
-.pg{height:14px;background:#222;clip-path:polygon(0 0,100% 0,98% 100%,0 100%)}
-.pg i{display:block;height:100%;background:var(--red);transform-origin:left;transform:scaleX(0)}
-.st{display:flex;justify-content:space-between;font:700 .95rem Raj,sans-serif;color:var(--red);letter-spacing:.08em}
-#tip{font-size:.9rem;color:var(--mut);min-height:4.2em}
-@media(prefers-reduced-motion:no-preference){
-  #load{animation:lstripe 3s linear infinite}
-  @keyframes lstripe{to{background-position:44px 44px}}
-  .lt .logo{animation:pop .9s cubic-bezier(.2,.9,.3,1.4) both}
-  @keyframes pop{from{transform:scale(.4) rotate(-20deg);opacity:0}}
-}
-@media(prefers-reduced-motion:reduce){#load.out{animation:none;opacity:0}}
-@media(max-width:860px){
-  .hero,.two,.contact,.build{grid-template-columns:1fr}
-  .modes{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr 1fr}
-  .discs{grid-template-columns:repeat(3,1fr)}
-  h1{font-size:18vw}
-  .sig span,.yr{display:none}
-}
-@media(max-width:520px){.steps{grid-template-columns:1fr}}
-
-@media(prefers-reduced-motion:no-preference){
-  .copy>*{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
-  .copy>:nth-child(2){animation-delay:.08s}.copy>:nth-child(3){animation-delay:.16s}
-  .copy>:nth-child(4){animation-delay:.24s}.copy>:nth-child(5){animation-delay:.32s}
-  .art{animation:wipe .9s cubic-bezier(.7,0,.2,1) both}
-  @keyframes up{from{transform:translateY(28px);opacity:0}}
-  @keyframes wipe{from{clip-path:inset(0 0 0 100%)}}
-}
-
-</style>
-<noscript><style>#load{display:none}</style></noscript>
+<link rel="stylesheet" href="css/style.css">
+<noscript><style>#loading{display:none}</style></noscript>
 </head>
 <body>
 <div class="bg" aria-hidden="true"></div>
 
-<!-- LOADING PAGE -->
-<div id="load" role="status" aria-label="Memuat">
-  <img class="lw" id="lw" alt="">
-  <div class="lc">
-    <div class="lt"><div class="num"><span id="pc">0</span><small>%</small></div><img class="logo" src="assets/img/logo_white.png" alt="ZZZ"></div>
-    <img class="lg" src="assets/img/loading.webp" alt="Now loading, Bangboo N.E.T.">
-    <div class="pg"><i id="bar"></i></div>
-    <div class="st"><span>BANGBOO N.E.T.</span><span id="stt">CONNECTING</span></div>
-    <p id="tip"></p>
+<!-- LOADING PAGE: data di js/data/loading.js -->
+<div id="loading" role="status" aria-label="Memuat">
+  <div class="loading-left">
+    <div class="loading-mode-header"><img id="loading-icon" alt=""></div>
+    <p class="loading-tip" id="loading-tip"></p>
+    <div class="loading-footer">
+      <img class="loading-footer-icons" src="assets/img/svg/icon_loading_bottom.svg" alt="">
+      <div class="loading-meta">
+        <div class="loading-no" id="loading-no"></div>
+        <div class="loading-category" id="loading-category"></div>
+      </div>
+    </div>
+  </div>
+  <div class="loading-right">
+    <img class="loading-art" id="loading-art" alt="">
+    <img class="loading-logo" src="assets/img/logo_white.png" alt="ZZZ">
+    <img class="loading-now" src="assets/img/now-loading.webp" alt="Now loading, Bangboo N.E.T.">
   </div>
 </div>
 
@@ -243,8 +47,8 @@ footer{max-width:1180px;margin:0 auto;padding:1.5rem 1.25rem 0;font-size:.85rem;
       </div>
     </div>
     <div class="art panel">
-      <div class="vbg" aria-hidden="true"></div>
-      <img class="ellen" id="hero" src="assets/img/hero/ellen.webp" alt="Ilustrasi agent Ellen Joe dari Zenless Zone Zero">
+      <div class="hero-bg-text" aria-hidden="true"></div>
+      <img class="hero-art" id="hero-art" src="assets/img/hero/ellen.webp" alt="Ilustrasi agent Ellen Joe dari Zenless Zone Zero">
     </div>
   </header>
 
@@ -265,17 +69,19 @@ footer{max-width:1180px;margin:0 auto;padding:1.5rem 1.25rem 0;font-size:.85rem;
     </div>
   </section>
 
-  <!-- SHOWCASE: isi dari MODES di bawah (script) -->
+  <!-- SHOWCASE: data di js/data/videos.js -->
   <section class="sec" id="showcase">
-    <h2>Showcase <span class="tag" id="count"></span></h2>
-    <div class="modes" id="modes"></div>
-    <div class="grid" id="grid"></div>
+    <h2>Showcase <span class="tag" id="video-count"></span></h2>
+    <div class="new-upload panel" id="new-upload" hidden></div>
+    <div class="mode-list" id="mode-list"></div>
+    <div class="video-grid" id="video-grid"></div>
   </section>
 
-  <!-- BUILD AGENT (drive disc). Edit data di BUILDS (script) -->
+  <!-- BUILD AGENT: data di js/data/agents.js -->
   <section class="sec" id="build">
     <h2>Build agent</h2>
-    <div id="builds"></div>
+    <div class="agent-tabs" id="agent-tabs"></div>
+    <div class="build-view panel" id="build-view"></div>
   </section>
 
   <!-- PROYEK -->
@@ -317,158 +123,23 @@ footer{max-width:1180px;margin:0 auto;padding:1.5rem 1.25rem 0;font-size:.85rem;
     <li><a href="#proyek">Proyek</a></li>
     <li><a href="#contact">Kontak</a></li>
   </ul>
-  <b class="yr">[ 2026 ]</b>
+  <b class="yr" id="clock"></b>
 </nav>
 
-<dialog id="dlg"><button type="button" id="x">Tutup</button><img id="dimg" alt=""><p id="dcap"></p><a class="btn p" id="go" target="_blank" rel="noopener" hidden>Tonton video</a></dialog>
+<dialog id="lightbox">
+  <button type="button" id="lightbox-close">Tutup</button>
+  <img id="lightbox-image" alt="">
+  <p id="lightbox-caption"></p>
+  <a class="btn p" id="lightbox-link" target="_blank" rel="noopener">Tonton video</a>
+</dialog>
 
-<script>
-/* ===== DATA (edit di sini) =====
-   items: [thumbnail, judul, poin, link video TikTok (opsional)]
-   thumbnail = nomor (assets/img/tNOMOR.webp) ATAU nama file di assets/img, mis. 'video-baru.jpg' */
-const MODES=[
- {name:'Shiyu Defense',img:'shiyu.webp',items:[
-  [2,'Shiyu Defense 05 · Room 1','42K'],[8,'Shiyu Defense 05 · Room 1','45K'],[11,'Shiyu Defense 05 · Room 1','48K'],[18,'Shiyu Defense 05 · Room 1','41K'],
-  [3,'Shiyu Defense 05 · Room 2','45K'],[9,'Shiyu Defense 05 · Room 2','44K'],[12,'Shiyu Defense 05 · Room 2','36K'],[19,'Shiyu Defense 05 · Room 2','42K'],
-  [1,'Shiyu Defense 05 · Room 3','41K'],[4,'Shiyu Defense 05 · Room 3','43K'],[10,'Shiyu Defense 05 · Room 3','39K'],[13,'Shiyu Defense 05 · Room 3','37K'],[20,'Shiyu Defense 05 · Room 3','45K']]},
- {name:'Deadly Assault',img:'deadly.webp',items:[
-  [5,'Kusarikku','34K'],[16,'Kusarikku','36K'],[6,'Girtabilulu - Stagnant','46K'],[7,'Ye Shiyuan the Thrall','43K'],
-  [14,'Phaethon of the Scorched','44K'],[15,'Infernal Revenant','26K'],[17,'Infernal Revenant','43K'],[22,'Etheric Other - Truvie','40K'],[23,'Unknown Corruption','41K']]},
- {name:'Annihilation Simulacrum',img:'an.webp',items:[
-  [21,'Integrated: Sacrifice - Heretic Jester (Extreme)','']]}
-];
-/* Build agent: tab [id, nama, mindscape+W-Engine, mis. 'M0W1' (M = Mindscape, W = W-Engine)]. Kosongkan '' kalau belum diisi */
-const BUILDS=[['remielle','Remielle','M0W1'],['velina','Velina','M0W1'],['nangong_yu','Nangong Yu','M0W0'],['sunna','Sunna','M0W1'],['dialyn','Dialyn','M0W1'],['lucia','Lucia','M1W1'],['ye_shunguang','Ye Shunguang','M0W1'],['yuzuha','Yuzuha','M0W0'],['yixuan','Yixuan','M0W1'],['zhao','Zhao','M0W0'],['vivian','Vivian','M0W1'],['astra_yao','Astra Yao','M0W1'],['ellen','Ellen Joe','M0W1'],['burnice','Burnice','M0W1'],['lycaon','Lycaon','M2W1'],['miyabi','Miyabi','M0W1']];
-/* Data disc per agent (hasil baca screenshot build).
-   AG[id]={e:nama W-Engine, l:level, d:[[kunciSet, mainStat, nilai, [[substat, nilai, jumlahRoll]x4]] x6 slot]}
-   jumlahRoll 1 = belum di-upgrade, 2 = +1, dst. */
-const AG={"remielle":{"e":"Ode of Resurrected","l":60,"d":[["feathered_fate","HP","2200",[["CRIT Rate","2.4%",1],["Anomaly Proficiency","18",2],["ATK","12%",4],["ATK","19",1]]],["feathered_fate","ATK","316",[["DEF","9.6%",2],["ATK","12%",4],["Anomaly Proficiency","9",1],["CRIT Rate","4.8%",2]]],["feathered_fate","DEF","184",[["CRIT DMG","9.6%",2],["Anomaly Proficiency","18",2],["ATK","9%",3],["PEN","9",1]]],["freedom_blues","Anomaly Proficiency","92",[["DEF","15",1],["ATK","9%",3],["ATK","38",2],["CRIT Rate","4.8%",2]]],["freedom_blues","ATK","30%",[["ATK","38",2],["DEF","9.6%",2],["CRIT Rate","2.4%",1],["Anomaly Proficiency","27",3]]],["feathered_fate","ATK","30%",[["ATK","38",2],["PEN","18",2],["HP","6%",2],["Anomaly Proficiency","27",3]]]]},"velina":{"e":"Joyau Doré","l":60,"d":[["wuthering_salon","HP","2200",[["DEF","30",2],["ATK","6%",2],["Anomaly Proficiency","27",3],["DEF","4.8%",1]]],["swing_jazz","ATK","316",[["DEF","45",3],["CRIT Rate","2.4%",1],["Anomaly Proficiency","27",3],["CRIT DMG","9.6%",2]]],["wuthering_salon","DEF","184",[["ATK","9%",3],["DEF","9.6%",2],["PEN","9",1],["Anomaly Proficiency","27",3]]],["wuthering_salon","Anomaly Proficiency","92",[["PEN","18",2],["ATK","9%",3],["HP","112",1],["DEF","9.6%",2]]],["wuthering_salon","Wind DMG Bonus","30%",[["ATK","6%",2],["HP","3%",1],["Anomaly Proficiency","18",2],["HP","336",3]]],["swing_jazz","Energy Regen","60%",[["ATK","6%",2],["DEF","4.8%",1],["DEF","30",2],["Anomaly Proficiency","27",3]]]]},"nangong_yu":{"e":"Steam Oven","l":60,"d":[["phaethon_s_melody","HP","2200",[["DEF","30",2],["Anomaly Proficiency","27",3],["ATK","38",2],["PEN","9",1]]],["phaethon_s_melody","ATK","316",[["ATK","6%",2],["DEF","9.6%",2],["CRIT Rate","4.8%",2],["Anomaly Proficiency","27",3]]],["phaethon_s_melody","DEF","184",[["Anomaly Proficiency","36",4],["HP","3%",1],["HP","224",2],["CRIT DMG","4.8%",1]]],["chaos_jazz","Anomaly Proficiency","92",[["ATK","6%",2],["DEF","15",1],["PEN","27",3],["DEF","9.6%",2]]],["chaos_jazz","PEN Ratio","24%",[["PEN","9",1],["ATK","57",3],["CRIT DMG","9.6%",2],["Anomaly Proficiency","18",2]]],["phaethon_s_melody","Anomaly Mastery","30%",[["PEN","18",2],["CRIT DMG","9.6%",2],["ATK","38",2],["Anomaly Proficiency","18",2]]]]},"sunna":{"e":"Thoughtbop","l":60,"d":[["moonlight_lullaby","HP","2200",[["ATK","9%",3],["PEN","18",2],["HP","6%",2],["ATK","19",1]]],["moonlight_lullaby","ATK","316",[["CRIT DMG","14.4%",3],["HP","224",2],["ATK","6%",2],["Anomaly Proficiency","9",1]]],["swing_jazz","DEF","184",[["CRIT Rate","4.8%",2],["ATK","12%",4],["DEF","4.8%",1],["CRIT DMG","9.6%",2]]],["moonlight_lullaby","ATK","30%",[["Anomaly Proficiency","18",2],["CRIT Rate","2.4%",1],["HP","6%",2],["CRIT DMG","14.4%",3]]],["swing_jazz","ATK","30%",[["DEF","45",3],["DEF","9.6%",2],["CRIT Rate","2.4%",1],["CRIT DMG","9.6%",2]]],["moonlight_lullaby","Energy Regen","60%",[["PEN","18",2],["Anomaly Proficiency","18",2],["DEF","15",1],["ATK","9%",3]]]]},"dialyn":{"e":"Yesterday Calls","l":60,"d":[["moonlight_lullaby","HP","2200",[["CRIT DMG","4.8%",1],["DEF","4.8%",1],["CRIT Rate","12%",5],["Anomaly Proficiency","9",1]]],["king_of_the_summit","ATK","316",[["DEF","4.8%",1],["CRIT DMG","19.2%",4],["HP","224",2],["CRIT Rate","4.8%",2]]],["king_of_the_summit","DEF","184",[["CRIT Rate","7.2%",3],["CRIT DMG","14.4%",3],["Anomaly Proficiency","9",1],["ATK","6%",2]]],["moonlight_lullaby","CRIT Rate","24%",[["CRIT DMG","9.6%",2],["HP","3%",1],["ATK","9%",3],["HP","224",2]]],["king_of_the_summit","Physical DMG Bonus","30%",[["ATK","38",2],["CRIT DMG","14.4%",3],["ATK","3%",1],["CRIT Rate","4.8%",2]]],["king_of_the_summit","Energy Regen","60%",[["ATK","19",1],["Anomaly Proficiency","36",4],["CRIT Rate","4.8%",2],["DEF","15",1]]]]},"lucia":{"e":"Dreamlit Hearth","l":55,"d":[["moonlight_lullaby","HP","2200",[["HP","9%",3],["PEN","18",2],["DEF","9.6%",2],["CRIT Rate","4.8%",2]]],["bunny_in_wonderland","ATK","316",[["CRIT DMG","4.8%",1],["DEF","30",2],["CRIT Rate","4.8%",2],["HP","12%",4]]],["moonlight_lullaby","DEF","184",[["PEN","27",3],["HP","9%",3],["HP","224",2],["DEF","4.8%",1]]],["moonlight_lullaby","HP","30%",[["ATK","38",2],["CRIT Rate","7.2%",3],["CRIT DMG","9.6%",2],["ATK","6%",2]]],["moonlight_lullaby","HP","30%",[["CRIT Rate","7.2%",3],["HP","112",1],["CRIT DMG","4.8%",1],["ATK","9%",3]]],["bunny_in_wonderland","HP","30%",[["ATK","76",4],["ATK","6%",2],["HP","112",1],["DEF","30",2]]]]},"ye_shunguang":{"e":"Cloudcleave Radiance","l":60,"d":[["white_water_ballad","HP","2200",[["CRIT DMG","19.2%",4],["DEF","30",2],["CRIT Rate","4.8%",2],["DEF","4.8%",1]]],["white_water_ballad","ATK","316",[["CRIT DMG","9.6%",2],["DEF","9.6%",2],["CRIT Rate","2.4%",1],["ATK","12%",4]]],["branch_blade_song","DEF","184",[["CRIT DMG","9.6%",2],["DEF","4.8%",1],["ATK","6%",2],["CRIT Rate","7.2%",3]]],["white_water_ballad","CRIT DMG","48%",[["PEN","18",2],["ATK","19",1],["CRIT Rate","7.2%",3],["ATK","9%",3]]],["white_water_ballad","PEN Ratio","24%",[["ATK","38",2],["DEF","9.6%",2],["Anomaly Proficiency","9",1],["CRIT DMG","14.4%",3]]],["branch_blade_song","ATK","30%",[["ATK","19",1],["HP","9%",3],["CRIT Rate","7.2%",3],["CRIT DMG","4.8%",1]]]]},"yuzuha":{"e":"Kaboom the Cannon","l":60,"d":[["phaethon_s_melody","HP","2200",[["HP","6%",2],["CRIT Rate","2.4%",1],["Anomaly Proficiency","27",3],["ATK","6%",2]]],["moonlight_lullaby","ATK","316",[["ATK","12%",4],["CRIT DMG","4.8%",1],["DEF","4.8%",1],["CRIT Rate","4.8%",2]]],["moonlight_lullaby","DEF","184",[["ATK","9%",3],["HP","112",1],["Anomaly Proficiency","18",2],["CRIT DMG","14.4%",3]]],["moonlight_lullaby","ATK","30%",[["ATK","57",3],["PEN","9",1],["HP","3%",1],["Anomaly Proficiency","27",3]]],["moonlight_lullaby","ATK","30%",[["HP","12%",4],["DEF","30",2],["Anomaly Proficiency","9",1],["CRIT DMG","4.8%",1]]],["phaethon_s_melody","Anomaly Mastery","30%",[["ATK","57",3],["CRIT DMG","4.8%",1],["DEF","30",2],["CRIT Rate","4.8%",2]]]]},"yixuan":{"e":"Qingming Birdcage","l":60,"d":[["branch_blade_song","HP","2200",[["HP","6%",2],["CRIT DMG","14.4%",3],["CRIT Rate","4.8%",2],["DEF","30",2]]],["yunkui_tales","ATK","316",[["HP","9%",3],["HP","224",2],["DEF","15",1],["CRIT DMG","9.6%",2]]],["yunkui_tales","DEF","184",[["CRIT Rate","4.8%",2],["DEF","9.6%",2],["CRIT DMG","19.2%",4],["Anomaly Proficiency","9",1]]],["branch_blade_song","CRIT DMG","48%",[["ATK","9%",3],["HP","112",1],["HP","12%",4],["CRIT Rate","2.4%",1]]],["yunkui_tales","Ether DMG Bonus","30%",[["DEF","45",3],["CRIT DMG","9.6%",2],["HP","112",1],["CRIT Rate","7.2%",3]]],["yunkui_tales","HP","30%",[["DEF","30",2],["CRIT Rate","12%",5],["CRIT DMG","4.8%",1],["ATK","3%",1]]]]},"zhao":{"e":"Original Transmorpher","l":60,"d":[["bunny_in_wonderland","HP","2200",[["ATK","6%",2],["ATK","19",1],["HP","9%",3],["DEF","30",2]]],["swing_jazz","ATK","316",[["HP","9%",3],["HP","336",3],["DEF","4.8%",1],["DEF","15",1]]],["swing_jazz","DEF","184",[["ATK","3%",1],["Anomaly Proficiency","18",2],["HP","9%",3],["HP","224",2]]],["bunny_in_wonderland","HP","30%",[["CRIT Rate","9.6%",4],["HP","112",1],["DEF","15",1],["PEN","18",2]]],["bunny_in_wonderland","HP","30%",[["Anomaly Proficiency","9",1],["ATK","76",4],["HP","224",2],["DEF","9.6%",2]]],["bunny_in_wonderland","Energy Regen","60%",[["PEN","18",2],["HP","6%",2],["HP","224",2],["ATK","38",2]]]]},"vivian":{"e":"Flight of Fancy","l":60,"d":[["phaethon_s_melody","HP","2200",[["CRIT Rate","2.4%",1],["Anomaly Proficiency","27",3],["PEN","18",2],["HP","6%",2]]],["chaos_jazz","ATK","316",[["CRIT DMG","9.6%",2],["ATK","9%",3],["DEF","15",1],["Anomaly Proficiency","18",2]]],["chaos_jazz","DEF","184",[["Anomaly Proficiency","36",4],["ATK","38",2],["DEF","4.8%",1],["CRIT DMG","4.8%",1]]],["phaethon_s_melody","Anomaly Proficiency","92",[["ATK","19",1],["CRIT DMG","9.6%",2],["ATK","9%",3],["PEN","18",2]]],["phaethon_s_melody","ATK","30%",[["Anomaly Proficiency","36",4],["DEF","15",1],["CRIT DMG","9.6%",2],["HP","112",1]]],["phaethon_s_melody","Anomaly Mastery","30%",[["DEF","30",2],["HP","224",2],["Anomaly Proficiency","18",2],["HP","6%",2]]]]},"astra_yao":{"e":"Elegant Vanity","l":60,"d":[["swing_jazz","HP","2200",[["Anomaly Proficiency","18",2],["HP","6%",2],["ATK","9%",3],["ATK","19",1]]],["astral_voice","ATK","316",[["HP","6%",2],["Anomaly Proficiency","18",2],["ATK","6%",2],["CRIT DMG","9.6%",2]]],["astral_voice","DEF","184",[["Anomaly Proficiency","18",2],["CRIT DMG","9.6%",2],["ATK","57",3],["ATK","6%",2]]],["astral_voice","ATK","30%",[["DEF","4.8%",1],["Anomaly Proficiency","18",2],["ATK","38",2],["CRIT Rate","7.2%",3]]],["swing_jazz","ATK","30%",[["Anomaly Proficiency","18",2],["CRIT DMG","9.6%",2],["DEF","30",2],["DEF","9.6%",2]]],["astral_voice","Energy Regen","60%",[["ATK","6%",2],["Anomaly Proficiency","18",2],["CRIT DMG","9.6%",2],["PEN","27",3]]]]},"ellen":{"e":"Deep Sea Visitor","l":60,"d":[["woodpecker_electro","HP","2200",[["ATK","19",1],["ATK","12%",4],["CRIT DMG","9.6%",2],["CRIT Rate","2.4%",1]]],["branch_blade_song","ATK","316",[["PEN","9",1],["Anomaly Proficiency","18",2],["CRIT Rate","4.8%",2],["CRIT DMG","14.4%",3]]],["woodpecker_electro","DEF","184",[["CRIT Rate","2.4%",1],["ATK","12%",4],["CRIT DMG","9.6%",2],["PEN","9",1]]],["woodpecker_electro","CRIT DMG","48%",[["HP","112",1],["ATK","12%",4],["CRIT Rate","4.8%",2],["DEF","4.8%",1]]],["branch_blade_song","Ice DMG Bonus","30%",[["Anomaly Proficiency","18",2],["ATK","38",2],["CRIT Rate","4.8%",2],["ATK","9%",3]]],["woodpecker_electro","ATK","30%",[["CRIT DMG","14.4%",3],["ATK","38",2],["PEN","18",2],["CRIT Rate","4.8%",2]]]]},"burnice":{"e":"Flamemaker Shaker","l":60,"d":[["freedom_blues","HP","2200",[["CRIT Rate","4.8%",2],["Anomaly Proficiency","27",3],["ATK","57",3],["PEN","9",1]]],["freedom_blues","ATK","316",[["Anomaly Proficiency","27",3],["CRIT DMG","9.6%",2],["HP","336",3],["CRIT Rate","2.4%",1]]],["freedom_blues","DEF","184",[["CRIT DMG","9.6%",2],["ATK","6%",2],["Anomaly Proficiency","27",3],["DEF","4.8%",1]]],["swing_jazz","Anomaly Proficiency","92",[["HP","6%",2],["HP","224",2],["ATK","9%",3],["DEF","4.8%",1]]],["freedom_blues","Fire DMG Bonus","30%",[["ATK","6%",2],["Anomaly Proficiency","18",2],["CRIT DMG","4.8%",1],["DEF","60",4]]],["swing_jazz","Anomaly Mastery","30%",[["ATK","9%",3],["Anomaly Proficiency","27",3],["ATK","38",2],["HP","3%",1]]]]},"lycaon":{"e":"The Restrained","l":60,"d":[["king_of_the_summit","HP","2200",[["Anomaly Proficiency","27",3],["ATK","6%",2],["CRIT Rate","4.8%",2],["ATK","38",2]]],["shockstar_disco","ATK","316",[["Anomaly Proficiency","18",2],["CRIT DMG","9.6%",2],["CRIT Rate","7.2%",3],["HP","3%",1]]],["king_of_the_summit","DEF","184",[["HP","224",2],["CRIT Rate","4.8%",2],["CRIT DMG","4.8%",1],["PEN","27",3]]],["shockstar_disco","CRIT Rate","24%",[["PEN","18",2],["ATK","38",2],["CRIT DMG","9.6%",2],["DEF","9.6%",2]]],["king_of_the_summit","PEN Ratio","24%",[["CRIT Rate","2.4%",1],["ATK","6%",2],["Anomaly Proficiency","27",3],["CRIT DMG","9.6%",2]]],["king_of_the_summit","Impact","18%",[["DEF","30",2],["CRIT Rate","2.4%",1],["ATK","12%",4],["PEN","18",2]]]]},"miyabi":{"e":"Hailstorm Shrine","l":60,"d":[["branch_blade_song","HP","2200",[["DEF","4.8%",1],["ATK","12%",4],["CRIT DMG","9.6%",2],["PEN","9",1]]],["astral_voice","ATK","316",[["CRIT DMG","24%",5],["DEF","4.8%",1],["CRIT Rate","2.4%",1],["Anomaly Proficiency","9",1]]],["astral_voice","DEF","184",[["DEF","4.8%",1],["CRIT Rate","2.4%",1],["ATK","12%",4],["CRIT DMG","9.6%",2]]],["branch_blade_song","CRIT Rate","24%",[["DEF","4.8%",1],["CRIT DMG","14.4%",3],["ATK","6%",2],["HP","224",2]]],["branch_blade_song","PEN Ratio","24%",[["ATK","6%",2],["HP","224",2],["ATK","57",3],["CRIT Rate","4.8%",2]]],["branch_blade_song","ATK","30%",[["CRIT Rate","9.6%",4],["HP","112",1],["CRIT DMG","9.6%",2],["Anomaly Proficiency","9",1]]]]}};
-const SETS={"feathered_fate":"Feathered Fate","freedom_blues":"Freedom Blues","wuthering_salon":"Wuthering Salon","swing_jazz":"Swing Jazz","phaethon_s_melody":"Phaethon's Melody","chaos_jazz":"Chaos Jazz","moonlight_lullaby":"Moonlight Lullaby","king_of_the_summit":"King of the Summit","bunny_in_wonderland":"Bunny in Wonderland","white_water_ballad":"White Water Ballad","branch_blade_song":"Branch & Blade Song","yunkui_tales":"Yunkui Tales","astral_voice":"Astral Voice","woodpecker_electro":"Woodpecker Electro","shockstar_disco":"Shockstar Disco"};
-/* Stat agent: ST[id]=[baris stat, jumlah effective sub-stat, chip effective]
-   baris = total[/base+bonus] dipisah koma, urutan LAB; "Label:nilai" mengganti nama baris */
-const LAB=['HP','ATK','DEF','Impact','CRIT Rate','CRIT DMG','Anomaly Mastery','Anomaly Proficiency','PEN Ratio','Energy Regen','PEN'];
-const ST={
-remielle:['10131/7482+2649,4176/1566+2610,914/600+314,83,19.4%,59.6%,115,421,0.0%,1.20,27',32,'Percent ATK,Anomaly Proficiency,ATK'],
-velina:['10670/7788+2882,2471/1585+886,1077/612+465,86,7.4%,59.6%,112,383,0.0%,2.88/1.20+1.68,27,Wind DMG Bonus:40.0%',26,'Anomaly Proficiency,Percent ATK'],
-nangong_yu:['11049/8373+2676,1949/1340+609,970/622+348,120,9.8%,74.0%,173/126+47,341,24.0%,1.80/1.20+0.60,63,Ether DMG Bonus:0.0%',18,'Anomaly Proficiency,Percent ATK'],
-sunna:['11919/8477+3442,3509/1463+2046,930/600+330,98,14.6%,98.0%,96,140,0.0%,2.60/1.00+1.60,36,Physical DMG Bonus:0.0%',13,'Percent ATK,ATK'],
-dialyn:['11146/8250+2896,2108/1471+637,869/612+257,110,101.0%,112.4%,94,147,0.0%,2.16/1.20+0.96,0,Physical DMG Bonus:30.0%',33,'CRIT Rate,CRIT DMG,Percent ATK'],
-lucia:['24689/8477+16212,2165/1434+731,923/594+329,83,29.0%,69.2%,96,95,0.0%,1.87/1.56+0.31,45,Ether DMG Bonus:0.0%',14,'Percent HP,HP'],
-ye_shunguang:['10564/7673+2891,3031/1681+1350,994/606+388,83,48.2%,219.6%,94,102,24.0%,1.20,18,Physical DMG Bonus:10.0%',33,'CRIT DMG,CRIT Rate,Percent ATK'],
-yuzuha:['12996/8829+4167,3014/1382+1632,885/612+273,86,17.0%,78.8%,171/124+47,174,0.0%,2.04/1.20+0.84,9,Physical DMG Bonus:0.0%',18,'Percent ATK,Anomaly Proficiency'],
-yixuan:['19143/8373+10770,2124/1615+509,787/441+346,93,50.6%,171.6%,92,99,Sheer Force:2551,Automatic Adrenaline Accumulation:2.00,Ether DMG Bonus:30.0%',34,'CRIT Rate,CRIT DMG,Percent HP'],
-zhao:['25748/9117+16631,1930/1359+571,1045/701+344,93,14.6%,50.0%,93,123,0.0%,2.16/1.20+0.96,36,Ice DMG Bonus:0.0%',21,'Percent HP,HP'],
-vivian:['11130/7673+3457,2730/1593+1137,879/606+273,86,7.4%,83.6%,198/144+54,465,0.0%,1.20,36,Ether DMG Bonus:0.0%',21,'Anomaly Proficiency,Percent ATK'],
-astra_yao:['11843/8609+3234,3671/1428+2243,900/600+300,83,12.2%,88.4%,93,200,0.0%,2.80/1.56+1.24,27,Ether DMG Bonus:0.0%',15,'Percent ATK,ATK'],
-ellen:['9985/7673+2312,3300/1651+1649,819/606+213,93,75.4%,162.0%,94,129,0.0%,1.20,36,Ice DMG Bonus:30.0%',35,'CRIT Rate,CRIT DMG,Percent ATK'],
-burnice:['10792/7368+3424,2932/1576+1356,901/600+301,83,12.2%,74.0%,153/118+35,368,0.0%,1.87/1.56+0.31,9,Fire DMG Bonus:30.0%',24,'Anomaly Proficiency,Percent ATK'],
-lycaon:['11093/8416+2677,2142/1412+730,878/606+272,194/137+57,50.6%,83.6%,91,162,24.0%,1.20,63,Ice DMG Bonus:0.0%',24,'CRIT Rate,CRIT DMG,Percent ATK'],
-miyabi:['10433/7673+2760,3229/1623+1606,906/606+300,86,72.2%,133.2%,116,256,24.0%,1.20,9,Ice DMG Bonus:0.0%',34,'CRIT Rate,CRIT DMG,Percent ATK']};
-function statsHTML(id){
-  const [str,eff,chips]=ST[id];
-  const rows=str.split(',').map((t,i)=>{let l=LAB[i];if(t.includes(':')){[l,t]=t.split(':')}const [v,b]=t.split('/');return `<div class="sr"><span>${l}</span><b>${b?`<small>${b.split('+')[0]}<em>+${b.split('+')[1]}</em></small>`:''}${v}</b></div>`}).join('');
-  return `<div class="stats">${rows}</div><div class="eff"><span>Effective sub-stat didapat <b>${eff}</b> kali</span><div class="chips">${chips.split(',').map(c=>`<span>${c}</span>`).join('')}</div></div>`;
-}
-const TIPS=["During their EX Special Attacks, Agents get a powerful DMG Reduction buff, dealing massive DMG while being invulnerable.",
- "Commissions won't end immediately upon leaving a Hollow when you Pause. You can log in to the HDD system at the workshop to resume them."];
-
-/* ===== LOADING PAGE ===== */
-const $=s=>document.querySelector(s), L=$('#load');
-$('#lw').src='assets/img/load'+[1,3,5][Math.random()*3|0]+'.webp';
-$('#tip').textContent=TIPS[Math.random()*TIPS.length|0];
-const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-let closed=false,loaded=document.readyState==='complete';
-const closeLoad=()=>{if(closed)return;closed=true;L.classList.add('out');setTimeout(()=>L.remove(),reduce?400:850)};
-addEventListener('load',()=>loaded=true);
-const DUR=reduce?300:2600,t0=performance.now();
-(function tick(now){
-  if(!L.isConnected)return;
-  const t=Math.min(1,((now||performance.now())-t0)/DUR),v=Math.round((1-Math.pow(1-t,2.2))*100);
-  $('#pc').textContent=v;$('#bar').style.transform='scaleX('+v/100+')';
-  $('#stt').textContent=v<100?'CONNECTING':'ACCESS GRANTED';
-  if(t<1)requestAnimationFrame(tick);else(function w(){loaded?setTimeout(closeLoad,300):setTimeout(w,100)})();
-})();
-L.addEventListener('click',closeLoad);
-
-/* ===== SHOWCASE ===== */
-const TIMG=n=>typeof n==='number'?'assets/img/t'+n+'.webp':'assets/img/'+n;
-const total=MODES.reduce((n,m)=>n+m.items.length,0);
-$('#count').textContent=total+' video';
-$('#modes').innerHTML=MODES.map((m,i)=>`<button class="mode" data-i="${i}" aria-pressed="false"><img src="assets/img/${m.img}" alt=""><span>${m.name}</span><small>${m.items.length} video</small></button>`).join('');
-const dlg=$('#dlg');
-function show(i){
-  document.querySelectorAll('.mode').forEach((b,j)=>b.setAttribute('aria-pressed',i===j));
-  $('#grid').innerHTML=MODES[i].items.map(([n,t,p],k)=>`<button class="th" data-i="${i}" data-k="${k}"><img src="${TIMG(n)}" alt="Thumbnail ${t}" loading="lazy"><span>${t}${p?' · '+p+' PTS':''}</span></button>`).join('');
-}
-$('#modes').addEventListener('click',e=>{const b=e.target.closest('.mode');if(b)show(+b.dataset.i)});
-function openBox(src,cap,url,label){
-  $('#dimg').src=src;$('#dimg').alt=cap;$('#dcap').textContent=cap;
-  const g=$('#go');g.hidden=!url;if(url){g.href=url;g.textContent=label}
-  dlg.showModal();
-}
-/* item ke-4 (opsional) = link video TikTok. Kosong = link ke profil */
-const PROFILE='https://www.tiktok.com/@draazzzy';
-$('#grid').addEventListener('click',e=>{
-  const b=e.target.closest('.th');if(!b)return;
-  const [n,t,p,u]=MODES[b.dataset.i].items[b.dataset.k];
-  openBox(TIMG(n),t+(p?' · '+p+' PTS':''),u||PROFILE,u?'Tonton video di TikTok':'Buka TikTok @draazzzy');
-});
-$('#x').onclick=()=>dlg.close();
-dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
-show(0);
-
-/* ===== BUILD ===== */
-$('#builds').innerHTML='<div class="tabs" id="tabs"></div><div class="bview panel" id="bview"></div>';
-$('#tabs').innerHTML=BUILDS.map((b,i)=>`<button class="tab" data-i="${i}" aria-pressed="false"><img src="assets/img/b/${b[0]}_av.webp" alt="" loading="lazy">${b[2]?`<i>${b[2]}</i>`:''}${b[1]}</button>`).join('');
-/* Warna tema tiap agent (diambil dari warna resmi karakter) */
-const THEME={"remielle": "#f5a3c7", "velina": "#7a7dff", "nangong_yu": "#a65cff", "sunna": "#a8ff3d", "dialyn": "#38c0ff", "lucia": "#c3cbff", "ye_shunguang": "#e8e8f2", "yuzuha": "#ff4538", "yixuan": "#ffc21f", "zhao": "#5cff9a", "vivian": "#e060f0", "astra_yao": "#ff4fa8", "ellen": "#ff2a55", "burnice": "#ff7a1f", "lycaon": "#4f86ff", "miyabi": "#1ff0e8"};
-function accent(hex){
-  const [r,g,b]=[1,3,5].map(i=>parseInt(hex.substr(i,2),16)/255),mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;
-  let h=0,s=0,l=(mx+mn)/2;
-  if(d){s=d/(1-Math.abs(2*l-1));h=60*(mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4)}
-  const rgb=L=>{const a=s*Math.min(L,1-L),f=n=>{const k=(n+h/30)%12;return L-a*Math.max(-1,Math.min(k-3,9-k,1))};return[f(0),f(8),f(4)].map(v=>Math.round(v*255))};
-  const lum=c=>{const t=c.map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*t[0]+.7152*t[1]+.0722*t[2]};
-  let L=Math.max(l,.5),c=rgb(L);
-  while(lum(c)<.22&&L<.92){L+=.02;c=rgb(L)}   /* cukup terang agar terbaca di latar hitam */
-  return '#'+c.map(v=>v.toString(16).padStart(2,'0')).join('');
-}
-let heroId='ellen';
-function applyAgent(id,name){
-  document.documentElement.style.setProperty('--red',accent(THEME[id]));
-  if(id===heroId)return;heroId=id;
-  const hero=$('#hero'),n=new Image();
-  n.onload=()=>{if(heroId!==id)return;hero.style.opacity=0;setTimeout(()=>{hero.src=n.src;hero.alt='Ilustrasi agent '+name+' dari Zenless Zone Zero';hero.style.opacity=1},220)};
-  n.src='assets/img/hero/'+id+'.webp';
-}
-const ROM=['I','II','III','IV','V','VI'];
-const chips=mw=>{const m=/^M(\d)W(\d)$/.exec(mw||'');return m?`<b class="mw" title="Mindscape ${m[1]}">M${m[1]}</b><b class="mw w" title="W-Engine ${m[2]}">W${m[2]}</b>`:''};
-function build(i){
-  const [id,name,mw]=BUILDS[i],a=AG[id],cnt={};
-  a.d.forEach(d=>cnt[d[0]]=(cnt[d[0]]||0)+1);
-  document.querySelectorAll('.tab').forEach((t,j)=>t.setAttribute('aria-pressed',i===j));
-  applyAgent(id,name);
-  $('#bview').innerHTML=`<div class="bhead"><h3>${name}</h3>${chips(mw)}<div class="eng"><img src="assets/img/b/eng_${id}.webp" alt=""><span><small>W-Engine · Lv.${a.l}</small><b>${a.e}</b></span></div></div>`
-  +statsHTML(id)+`<div class="sets">${Object.entries(cnt).map(([k,n])=>`<span>${SETS[k]} ×${n}</span>`).join('')}</div>`
-  +`<div class="dgrid">${a.d.map((d,k)=>`<article class="dc"><div class="dh"><div class="hex">${ROM[k]}</div><div><b>${SETS[d[0]]}</b><small>Drive Disc · Lv.15</small></div><img src="assets/img/b/set_${d[0]}.webp" alt=""></div><div class="dm"><span>${d[1]}</span><em>${d[2]}</em></div><ul class="ds">${d[3].map(x=>`<li><span>${x[0]}${x[2]>1?`<i>+${x[2]-1}</i>`:''}</span><b>${x[1]}</b></li>`).join('')}</ul></article>`).join('')}</div>`;
-}
-$('#tabs').addEventListener('click',e=>{const t=e.target.closest('.tab');if(t)build(+t.dataset.i)});
-build(BUILDS.findIndex(b=>b[0]==='ellen'));
-
-/* ===== GERAK ELLEN (parallax) ===== */
-const art=$('.art');
-if(!reduce){
-  art.addEventListener('pointermove',e=>{const r=art.getBoundingClientRect();
-    art.style.setProperty('--px',((e.clientX-r.left)/r.width-.5)*-26+'px');
-    art.style.setProperty('--py',((e.clientY-r.top)/r.height-.5)*-18+'px')});
-  art.addEventListener('pointerleave',()=>{art.style.setProperty('--px','0px');art.style.setProperty('--py','0px')});
-}
-
-/* ===== NAV AKTIF ===== */
-const links=[...document.querySelectorAll('.nav li a')];
-const io=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting)links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id));
-}),{rootMargin:'-40% 0px -50% 0px'});
-document.querySelectorAll('#home,#about,#showcase,#build,#proyek,#contact').forEach(s=>io.observe(s));
-</script>
+<script src="js/data/videos.js"></script>
+<script src="js/data/agents.js"></script>
+<script src="js/data/loading.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/loading.js"></script>
+<script src="js/showcase.js"></script>
+<script src="js/agent-build.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
