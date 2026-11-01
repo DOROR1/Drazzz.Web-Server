@@ -18,4 +18,4 @@ CARA EDIT CEPAT
 - Ganti artwork/tip loading: taruh gambar di assets/img/loading/, daftarkan di js/data/loading.js
 - Ganti teks Tentang  : index.html
 - Ganti warna/tampilan: css/style.css
-Setelah mengubah file, muat ulang browser dengan Ctrl + F5.q
+Setelah mengubah file, muat ulang browser dengan Ctrl + F5.
