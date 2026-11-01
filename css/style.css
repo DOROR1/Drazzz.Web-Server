@@ -531,13 +531,13 @@ dialog button {
 }
 
 .agent-tab {
-  width: 84px;
+  width: 96px;
   padding: .3rem;
   background: var(--card);
   border: 3px solid var(--line);
   border-radius: 12px 4px 12px 4px;
   text-align: center;
-  font: 700 .85rem/1.1 Raj, sans-serif;
+  font: 700 .9rem/1.1 Raj, sans-serif;
   transition: border-color .2s, transform .2s;
 }
 
@@ -1012,26 +1012,22 @@ footer {
   overflow: hidden;
   font-size: clamp(11px, min(calc(100vh / 90), calc(100vw / 100)), 42px);
   color: #fff;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
 #loading.is-leaving {
   pointer-events: none;
-  visibility: hidden;
-  transition: visibility 0s .8s;
+  animation: shutter .8s cubic-bezier(.7, 0, .2, 1) forwards;
 }
 
-.loading-left,
-.loading-right {
-  transition: transform .8s cubic-bezier(1, 0, 0, 1);
-  will-change: transform;
-}
+@keyframes shutter {
+  60% {
+    clip-path: polygon(0 0, 75% 0, 45% 100%, 0 100%);
+  }
 
-#loading.is-leaving .loading-left {
-  transform: translateX(-100%);
-}
-
-#loading.is-leaving .loading-right {
-  transform: translateX(100%);
+  to {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
 }
 
 .loading-left {
@@ -1150,9 +1146,9 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .loading-left,
-  .loading-right {
-    transition: none;
+  #loading.is-leaving {
+    animation: none;
+    opacity: 0;
   }
 }
 
