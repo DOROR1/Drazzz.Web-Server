@@ -26,6 +26,7 @@ const SHOWCASE = [
       { image: 't9.webp', title: 'Shiyu Defense 05 · Room 2', points: '44K', link: 'https://www.tiktok.com/@draazzzy/video/7687273077989805332?is_from_webapp=1&sender_device=pc', date: '2026-09-19T23:45:00+07:00' },
       { image: 't12.webp', title: 'Shiyu Defense 05 · Room 2', points: '36K', link: 'https://www.tiktok.com/@draazzzy/video/7693202239015603462?is_from_webapp=1&sender_device=pc', date: '2026-10-05T23:13:00+07:00' },
       { image: 't19.webp', title: 'Shiyu Defense 05 · Room 2', points: '42K', link: 'https://www.tiktok.com/@draazzzy/video/7697472756245335316?is_from_webapp=1&sender_device=pc', date: '2026-10-17T23:25:00+07:00' },
+      { image: 't26.webp', title: 'Shiyu Defense 05 · Room 2', points: '47K', link: 'https://www.tiktok.com/@draazzzy/video/7703416997173808404?is_from_webapp=1&sender_device=pc', date: '2026-11-02T11:52:00+07:00' },
       { image: 't1.webp', title: 'Shiyu Defense 05 · Room 3', points: '41K', link: 'https://www.tiktok.com/@draazzzy/video/7667819572078071056?is_from_webapp=1&sender_device=pc', date: '2026-07-29T13:36:00+07:00' },
       { image: 't4.webp', title: 'Shiyu Defense 05 · Room 3', points: '43K', link: 'https://www.tiktok.com/@draazzzy/video/7681955768681139477?is_from_webapp=1&sender_device=pc', date: '2026-09-05T21:00:00+07:00' },
       { image: 't10.webp', title: 'Shiyu Defense 05 · Room 3', points: '39K', link: 'https://www.tiktok.com/@draazzzy/video/7687278294571437332?is_from_webapp=1&sender_device=pc', date: '2026-09-20T00:06:00+07:00' },
