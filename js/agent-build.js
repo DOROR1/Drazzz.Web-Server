@@ -58,6 +58,20 @@ function discCardHTML(disc, slotIndex) {
     </article>`;
 }
 
+const SKILL_NAMES = ['Basic', 'Dodge', 'Assist', 'Special', 'Chain', 'Core'];
+const SKILL_MAX = [12, 12, 12, 12, 12, 7];
+
+/* Level skill agent. Core Skill ditampilkan sebagai huruf (level 2 = A ... 7 = F) */
+function skillRowHTML(agent) {
+  const cells = agent.skills.map((level, i) => {
+    const isCore = i === SKILL_NAMES.length - 1;
+    const label = isCore && level >= 2 ? 'ABCDEF'[level - 2] : level;
+    const maxed = level >= SKILL_MAX[i] ? ' is-max' : '';
+    return `<div class="skill${maxed}" title="${SKILL_NAMES[i]} level ${level}"><small>${SKILL_NAMES[i]}</small><b>${label}</b></div>`;
+  }).join('');
+  return `<div class="skill-row">${cells}</div>`;
+}
+
 function applyTheme(agent) {
   document.documentElement.style.setProperty('--accent', readableAccent(agent.color));
 }
@@ -90,13 +104,15 @@ function showAgent(index) {
   view.style.setProperty('--art', `url(${new URL(imagePath.hero(agent), document.baseURI).href})`);
   view.innerHTML = `
     <div class="build-head">
-      <h3>${agent.name}</h3>${mindscapeChips(agent.mindscape)}
+      <div class="build-title"><h3>${agent.name}</h3><p class="faction">${agent.faction}</p></div>
+      ${mindscapeChips(agent.mindscape)}
       <div class="engine-card">
         <img src="${imagePath.engine(agent)}" alt="">
         <span><small>W-Engine · Lv.${agent.engine.level}</small><b>${agent.engine.name}</b></span>
       </div>
     </div>
     <div class="stat-grid">${statGridHTML(agent)}</div>
+    ${skillRowHTML(agent)}
     <div class="effective">${effectiveHTML(agent)}</div>
     <div class="set-list">${setListHTML(agent)}</div>
     <div class="disc-grid">${agent.discs.map(discCardHTML).join('')}</div>`;

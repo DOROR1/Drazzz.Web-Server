@@ -1,4 +1,4 @@
-/* Bagian Showcase: kartu kategori -> grid thumbnail -> lightbox + link video.
+/* Bagian Showcase: kartu kategori -> filter + urutan -> grid thumbnail -> lightbox + link video.
    Data: js/data/videos.js */
 
 const lightbox = {
@@ -8,8 +8,12 @@ const lightbox = {
   link: $('#lightbox-link'),
 };
 
+/* Pilihan yang sedang aktif */
+const view = { modeIndex: 0, group: '', order: 'newest' };
+
 const thumbnailPath = (video) => 'assets/img/' + video.image;
 const videoCaption = (video) => video.title + (video.points ? ` · ${video.points} PTS` : '');
+const timeOf = (video) => (video.date ? new Date(video.date).getTime() : 0);   /* tanpa tanggal = paling lama */
 
 function openLightbox(video) {
   lightbox.image.src = thumbnailPath(video);
@@ -20,19 +24,42 @@ function openLightbox(video) {
   lightbox.dialog.showModal();
 }
 
+/* Video pada kategori aktif, sesudah difilter dan diurutkan berdasarkan tanggal */
+function visibleVideos() {
+  const direction = view.order === 'newest' ? -1 : 1;
+  return SHOWCASE[view.modeIndex].videos
+    .map((video, index) => ({ video, index }))
+    .filter(({ video }) => !view.group || video.group === view.group)
+    .sort((a, b) => direction * (timeOf(a.video) - timeOf(b.video)) || a.index - b.index);
+}
+
 function renderModes() {
   $('#mode-list').innerHTML = SHOWCASE.map((mode, index) => `
-    <button class="mode-card" data-index="${index}" aria-pressed="false">
+    <button class="mode-card" data-index="${index}" aria-pressed="${index === view.modeIndex}">
       <img src="assets/img/${mode.cover}" alt="">
       <span>${mode.name}</span>
       <small>${mode.videos.length} video</small>
     </button>`).join('');
 }
 
-function showMode(modeIndex) {
-  $$('.mode-card').forEach((card, index) => card.setAttribute('aria-pressed', index === modeIndex));
-  $('#video-grid').innerHTML = SHOWCASE[modeIndex].videos.map((video, index) => `
-    <button class="video-card" data-mode="${modeIndex}" data-video="${index}">
+/* Tombol filter dibuat dari nilai "group" pada video; disembunyikan bila hanya ada satu grup */
+function renderFilters() {
+  const videos = SHOWCASE[view.modeIndex].videos;
+  const groups = [...new Set(videos.map((video) => video.group).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, 'id', { numeric: true }));
+  const list = $('#filter-list');
+  list.hidden = groups.length < 2;
+  if (list.hidden) return;
+
+  const chip = (value, label, count) => `
+    <button class="filter-chip" data-group="${value}" aria-pressed="${view.group === value}">${label} (${count})</button>`;
+  list.innerHTML = chip('', 'Semua', videos.length)
+    + groups.map((group) => chip(group, group, videos.filter((video) => video.group === group).length)).join('');
+}
+
+function renderVideos() {
+  $('#video-grid').innerHTML = visibleVideos().map(({ video, index }) => `
+    <button class="video-card" data-mode="${view.modeIndex}" data-video="${index}">
       <img src="${thumbnailPath(video)}" alt="Thumbnail ${video.title}" loading="lazy">
       ${isRecent(video.date) ? '<em class="badge-new">NEW</em>' : ''}
       <span>${videoCaption(video)}</span>
@@ -40,12 +67,20 @@ function showMode(modeIndex) {
     </button>`).join('');
 }
 
+function showMode(modeIndex) {
+  view.modeIndex = modeIndex;
+  view.group = '';
+  renderModes();
+  renderFilters();
+  renderVideos();
+}
+
 /* Panel NEW UPLOAD = video dengan tanggal upload paling baru */
 function renderNewUpload() {
   const uploads = SHOWCASE
     .flatMap((mode) => mode.videos.map((video) => ({ mode: mode.name, video })))
     .filter((item) => item.video.date)
-    .sort((a, b) => new Date(b.video.date) - new Date(a.video.date));
+    .sort((a, b) => timeOf(b.video) - timeOf(a.video));
   if (!uploads.length) return;
 
   const { mode, video } = uploads[0];
@@ -71,6 +106,19 @@ $('#mode-list').addEventListener('click', (event) => {
   if (card) showMode(Number(card.dataset.index));
 });
 
+$('#filter-list').addEventListener('click', (event) => {
+  const chip = event.target.closest('.filter-chip');
+  if (!chip) return;
+  view.group = chip.dataset.group;
+  renderFilters();
+  renderVideos();
+});
+
+$('#sort-order').addEventListener('change', (event) => {
+  view.order = event.target.value;
+  renderVideos();
+});
+
 $('#video-grid').addEventListener('click', (event) => {
   const card = event.target.closest('.video-card');
   if (card) openLightbox(SHOWCASE[card.dataset.mode].videos[card.dataset.video]);
@@ -82,6 +130,5 @@ lightbox.dialog.addEventListener('click', (event) => {
 });
 
 $('#video-count').textContent = SHOWCASE.reduce((sum, mode) => sum + mode.videos.length, 0) + ' video';
-renderModes();
 showMode(0);
 renderNewUpload();

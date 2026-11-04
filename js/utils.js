@@ -16,8 +16,8 @@ function formatDate(date) {
   return hasTime ? text + ' WIB' : text;
 }
 
-/* true bila tanggal upload belum lewat 7 hari (untuk badge NEW) */
-const isRecent = (date) => Boolean(date) && Date.now() - new Date(date) < 7 * 24 * 36e5;
+/* true bila tanggal upload belum lewat 3 hari (untuk badge NEW) */
+const isRecent = (date) => Boolean(date) && Date.now() - new Date(date) < 3 * 24 * 36e5;
 
 /* Mencerahkan warna aksen yang terlalu gelap supaya tetap terbaca di latar hitam */
 function readableAccent(hex) {
