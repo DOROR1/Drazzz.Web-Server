@@ -531,7 +531,7 @@ const AGENTS = [
     id: 'qingyi',
     name: 'Qingyi',
     color: '#2fbf8f',
-    mindscape: '',
+    mindscape: 'M0W1',
     faction: 'Criminal Investigation Special Response Team',
     skills: [12, 10, 7, 10, 9, 7],
     engine: { name: 'Ice-Jade Teapot', level: 60 },
