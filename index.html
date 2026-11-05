@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<title>Drazzz. | Portofolio</title>
-<meta name="description" content="Portofolio Drazzz.: desain Canva dan konten showcase Zenless Zone Zero.">
+<title data-en="Drazzz. | Portfolio">Drazzz. | Portofolio</title>
+<meta name="description" content="Portofolio Drazzz.: desain Canva dan konten showcase Zenless Zone Zero." data-en="Drazzz. portfolio: Canva design and Zenless Zone Zero showcase content.">
 <link rel="stylesheet" href="css/style.css">
 <noscript><style>#loading{display:none}</style></noscript>
 </head>
@@ -37,14 +37,15 @@
   <!-- HERO -->
   <header class="hero" id="home">
     <div class="copy">
-      <p class="chip">@draazzzy di TikTok</p>
+      <p class="chip" data-en="@draazzzy on TikTok">@draazzzy di TikTok</p>
       <h1>Drazzz.</h1>
       <p class="script">showcase maker</p>
-      <p class="lead">Kreator konten showcase Zenless Zone Zero dan pembuat desain di Canva. Website ini adalah tugas: dibangun di VirtualBox dan dipublikasikan lewat Cloudflare Tunnel.</p>
+      <p class="lead" data-en="Zenless Zone Zero showcase content creator and Canva designer. This website is a class project: built on VirtualBox and published through Cloudflare Tunnel.">Kreator konten showcase Zenless Zone Zero dan pembuat desain di Canva. Website ini adalah tugas: dibangun di VirtualBox dan dipublikasikan lewat Cloudflare Tunnel.</p>
       <div class="btns">
-        <a class="btn p" href="#showcase">Lihat showcase</a>
-        <a class="btn" href="https://www.tiktok.com/@draazzzy" target="_blank" rel="noopener">Buka TikTok</a>
+        <a class="btn p" href="#showcase" data-en="View showcase">Lihat showcase</a>
+        <a class="btn" href="https://www.tiktok.com/@draazzzy" target="_blank" rel="noopener" data-en="Open TikTok">Buka TikTok</a>
       </div>
+      <div class="hero-stats" id="hero-stats"></div>
     </div>
     <div class="art panel">
       <div class="hero-bg-text" aria-hidden="true"></div>
@@ -54,17 +55,17 @@
 
   <!-- TENTANG -->
   <section class="sec" id="about">
-    <h2>Tentang</h2>
+    <h2 data-en="About">Tentang</h2>
     <div class="two">
       <div class="about panel">
-        <p>Halo, aku Darari Dowi. Aku suka bikin desain di Canva dan membuat konten showcase Zenless Zone Zero untuk TikTok: dari memilih agent, menata tampilan, sampai mengemasnya jadi video pendek.</p>
-        <p>Portofolio ini dibuat untuk tugas infrastruktur web, jadi selain karya kreatif aku juga menampilkan proses menaikkan website dari mesin virtual sampai bisa dibuka dari internet.</p>
+        <p data-en="Hi, I'm Darari Dowi. I enjoy designing in Canva and making Zenless Zone Zero showcase content for TikTok: from picking agents and arranging the layout to packaging it into short videos.">Halo, aku Darari Dowi. Aku suka bikin desain di Canva dan membuat konten showcase Zenless Zone Zero untuk TikTok: dari memilih agent, menata tampilan, sampai mengemasnya jadi video pendek.</p>
+        <p data-en="This portfolio was made for a web infrastructure assignment, so besides my creative work I also show how the website goes from a virtual machine to being reachable on the internet.">Portofolio ini dibuat untuk tugas infrastruktur web, jadi selain karya kreatif aku juga menampilkan proses menaikkan website dari mesin virtual sampai bisa dibuka dari internet.</p>
       </div>
       <ul class="skills panel">
-        <li><b>Desain di Canva</b><span>Poster, thumbnail, dan layout konten.</span></li>
-        <li><b>Konten showcase ZZZ</b><span>Video showcase agent untuk TikTok.</span></li>
-        <li><b>Web server di VirtualBox</b><span>Website berjalan di mesin virtual.</span></li>
-        <li><b>Cloudflare Tunnel</b><span>Publikasi ke internet tanpa membuka port.</span></li>
+        <li><b data-en="Canva design">Desain di Canva</b><span data-en="Posters, thumbnails, and content layouts.">Poster, thumbnail, dan layout konten.</span></li>
+        <li><b data-en="ZZZ showcase content">Konten showcase ZZZ</b><span data-en="Agent showcase videos for TikTok.">Video showcase agent untuk TikTok.</span></li>
+        <li><b data-en="Web server on VirtualBox">Web server di VirtualBox</b><span data-en="The website runs on a virtual machine.">Website berjalan di mesin virtual.</span></li>
+        <li><b data-en="Cloudflare Tunnel">Cloudflare Tunnel</b><span data-en="Publishing to the internet without opening ports.">Publikasi ke internet tanpa membuka port.</span></li>
       </ul>
     </div>
   </section>
@@ -76,10 +77,10 @@
     <div class="mode-list" id="mode-list"></div>
     <div class="video-toolbar" id="video-toolbar">
       <div class="filter-list" id="filter-list"></div>
-      <label class="sort-box">Urutkan
+      <label class="sort-box"><span data-en="Sort by">Urutkan</span>
         <select id="sort-order">
-          <option value="newest">Terbaru ke terlama</option>
-          <option value="oldest">Terlama ke terbaru</option>
+          <option value="newest" data-en="Newest first">Terbaru ke terlama</option>
+          <option value="oldest" data-en="Oldest first">Terlama ke terbaru</option>
         </select>
       </label>
     </div>
@@ -95,13 +96,13 @@
 
   <!-- PROYEK -->
   <section class="sec" id="proyek">
-    <h2>Dari VM ke internet</h2>
+    <h2 data-en="From VM to the internet">Dari VM ke internet</h2>
     <ol class="steps">
-      <li><b>Bangun website</b><p>Web server berjalan di mesin virtual VirtualBox.</p></li>
-      <li><b>Pasang panel</b><p>Panel Barepod untuk mengelola server.</p></li>
-      <li><b>Beli domain</b><p>Nama domain dibeli lewat SumoPod.</p></li>
-      <li><b>Sambungkan tunnel</b><p>Cloudflare Tunnel mengarahkan domain ke VM.</p></li>
-      <li><b>Online</b><p>Website bisa dibuka dari internet.</p></li>
+      <li><b data-en="Build the website">Bangun website</b><p data-en="A web server runs on a VirtualBox virtual machine.">Web server berjalan di mesin virtual VirtualBox.</p></li>
+      <li><b data-en="Install the panel">Pasang panel</b><p data-en="Barepod panel to manage the server.">Panel Barepod untuk mengelola server.</p></li>
+      <li><b data-en="Buy a domain">Beli domain</b><p data-en="The domain name is bought through SumoPod.">Nama domain dibeli lewat SumoPod.</p></li>
+      <li><b data-en="Connect the tunnel">Sambungkan tunnel</b><p data-en="Cloudflare Tunnel points the domain to the VM.">Cloudflare Tunnel mengarahkan domain ke VM.</p></li>
+      <li><b data-en="Online">Online</b><p data-en="The website can be opened from the internet.">Website bisa dibuka dari internet.</p></li>
     </ol>
   </section>
 
@@ -109,34 +110,35 @@
   <section class="sec" id="contact">
     <div class="contact panel">
       <div>
-        <h3>Hubungi aku</h3>
+        <h3 data-en="Contact me">Hubungi aku</h3>
         <p>dararidowi@gmail.com &middot; TikTok @draazzzy</p>
       </div>
       <div class="btns">
-        <a class="btn p" href="mailto:dararidowi@gmail.com">Kirim email</a>
-        <a class="btn" href="https://www.tiktok.com/@draazzzy" target="_blank" rel="noopener">Buka TikTok</a>
+        <a class="btn p" href="mailto:dararidowi@gmail.com" data-en="Send email">Kirim email</a>
+        <a class="btn" href="https://www.tiktok.com/@draazzzy" target="_blank" rel="noopener" data-en="Open TikTok">Buka TikTok</a>
       </div>
     </div>
   </section>
 </main>
 
-<footer>Aset Zenless Zone Zero adalah milik HoYoverse. Dipakai sebagai fan content untuk tugas sekolah, tanpa tujuan komersial.</footer>
+<footer data-en="Zenless Zone Zero assets belong to HoYoverse. Used as fan content for a school assignment, with no commercial purpose.">Aset Zenless Zone Zero adalah milik HoYoverse. Dipakai sebagai fan content untuk tugas sekolah, tanpa tujuan komersial.</footer>
 
 <nav class="nav" aria-label="Navigasi utama">
   <div class="sig"><img src="assets/img/logo_white.png" alt="ZZZ"><span>Signal received // online</span></div>
   <ul>
     <li><a href="#home" class="on">Home</a></li>
-    <li><a href="#about">Tentang</a></li>
+    <li><a href="#about" data-en="About">Tentang</a></li>
     <li><a href="#showcase">Showcase</a></li>
     <li><a href="#build">Build</a></li>
-    <li><a href="#proyek">Proyek</a></li>
-    <li><a href="#contact">Kontak</a></li>
+    <li><a href="#proyek" data-en="Project">Proyek</a></li>
+    <li><a href="#contact" data-en="Contact">Kontak</a></li>
   </ul>
+  <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Bahasa / Language"><span data-lang="id">ID</span><span data-lang="en">EN</span></button>
   <b class="yr" id="clock"></b>
 </nav>
 
 <dialog id="lightbox">
-  <button type="button" id="lightbox-close">Tutup</button>
+  <button type="button" id="lightbox-close" data-en="Close">Tutup</button>
   <img id="lightbox-image" alt="">
   <p id="lightbox-caption"></p>
   <a class="btn p" id="lightbox-link" target="_blank" rel="noopener">Tonton video</a>
@@ -146,6 +148,7 @@
 <script src="js/data/agents.js"></script>
 <script src="js/data/loading.js"></script>
 <script src="js/utils.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/loading.js"></script>
 <script src="js/showcase.js"></script>
 <script src="js/agent-build.js"></script>

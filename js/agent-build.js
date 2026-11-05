@@ -13,6 +13,7 @@ const imagePath = {
 };
 
 let currentHeroId = 'ellen';
+let currentAgentIndex = 0;
 
 /* 'M0W1' -> chip "M0" dan "W1" */
 function mindscapeChips(code) {
@@ -32,7 +33,7 @@ function statGridHTML(agent) {
 
 function effectiveHTML(agent) {
   const chips = agent.effective.stats.map((stat) => `<span>${stat}</span>`).join('');
-  return `<span>Effective sub-stat didapat <b>${agent.effective.count}</b> kali</span><div class="chip-list">${chips}</div>`;
+  return `<span>${t('effective', agent.effective.count)}</span><div class="chip-list">${chips}</div>`;
 }
 
 /* Ringkasan set, mis. "Woodpecker Electro ×4" */
@@ -96,6 +97,7 @@ function swapHero(agent) {
 
 function showAgent(index) {
   const agent = AGENTS[index];
+  currentAgentIndex = index;
   $$('.agent-tab').forEach((tab, i) => tab.setAttribute('aria-pressed', i === index));
   applyTheme(agent);
   swapHero(agent);
@@ -130,3 +132,4 @@ $('#agent-tabs').addEventListener('click', (event) => {
 });
 
 showAgent(AGENTS.findIndex((agent) => agent.id === currentHeroId));
+document.addEventListener('app-language-change', () => showAgent(currentAgentIndex));

@@ -24,7 +24,7 @@ const AGENTS = [
     mindscape: 'M0W1',
     faction: 'Covenant of Dayat',
     skills: [12, 6, 12, 12, 12, 7],
-    engine: { name: 'Ode of Resurrected', level: 60 },
+    engine: { name: 'Ode of Resurrected Wings', level: 60 },
     effective: { count: 32, stats: ['Percent ATK', 'Anomaly Proficiency', 'ATK'] },
     stats: [
       ['HP', '10131', '7482', '+2649'],
@@ -531,7 +531,7 @@ const AGENTS = [
     id: 'qingyi',
     name: 'Qingyi',
     color: '#2fbf8f',
-    mindscape: 'M0W1',
+    mindscape: '',
     faction: 'Criminal Investigation Special Response Team',
     skills: [12, 10, 7, 10, 9, 7],
     engine: { name: 'Ice-Jade Teapot', level: 60 },

@@ -20,7 +20,7 @@ function openLightbox(video) {
   lightbox.image.alt = 'Thumbnail ' + video.title;
   lightbox.caption.textContent = videoCaption(video) + (video.date ? ' · ' + formatDate(video.date) : '');
   lightbox.link.href = video.link || TIKTOK_PROFILE;
-  lightbox.link.textContent = video.link ? 'Tonton video di TikTok' : 'Buka TikTok @draazzzy';
+  lightbox.link.textContent = video.link ? t('watchOnTikTok') : t('openProfile');
   lightbox.dialog.showModal();
 }
 
@@ -38,7 +38,7 @@ function renderModes() {
     <button class="mode-card" data-index="${index}" aria-pressed="${index === view.modeIndex}">
       <img src="assets/img/${mode.cover}" alt="">
       <span>${mode.name}</span>
-      <small>${mode.videos.length} video</small>
+      <small>${t('videoCount', mode.videos.length)}</small>
     </button>`).join('');
 }
 
@@ -53,7 +53,7 @@ function renderFilters() {
 
   const chip = (value, label, count) => `
     <button class="filter-chip" data-group="${value}" aria-pressed="${view.group === value}">${label} (${count})</button>`;
-  list.innerHTML = chip('', 'Semua', videos.length)
+  list.innerHTML = chip('', t('all'), videos.length)
     + groups.map((group) => chip(group, group, videos.filter((video) => video.group === group).length)).join('');
 }
 
@@ -89,13 +89,13 @@ function renderNewUpload() {
   panel.innerHTML = `
     <img src="${thumbnailPath(video)}" alt="Thumbnail ${video.title}">
     <div>
-      <em class="badge-new">NEW UPLOAD</em>
+      <em class="badge-new">${t('newUpload')}</em>
       <h3>${video.title}</h3>
       <p>${mode}${video.points ? ` · ${video.points} PTS` : ''}</p>
-      <p>Diupload ${formatDate(video.date)}</p>
+      <p>${t('uploaded')} ${formatDate(video.date)}</p>
       <div class="btns">
-        <a class="btn p" href="${video.link || TIKTOK_PROFILE}" target="_blank" rel="noopener">${video.link ? 'Tonton video' : 'Buka TikTok'}</a>
-        <button class="btn" id="new-upload-thumbnail" type="button">Lihat thumbnail</button>
+        <a class="btn p" href="${video.link || TIKTOK_PROFILE}" target="_blank" rel="noopener">${video.link ? t('watch') : t('openTikTok')}</a>
+        <button class="btn" id="new-upload-thumbnail" type="button">${t('viewThumbnail')}</button>
       </div>
     </div>`;
   $('#new-upload-thumbnail').addEventListener('click', () => openLightbox(video));
@@ -129,6 +129,21 @@ lightbox.dialog.addEventListener('click', (event) => {
   if (event.target === lightbox.dialog) lightbox.dialog.close();
 });
 
-$('#video-count').textContent = SHOWCASE.reduce((sum, mode) => sum + mode.videos.length, 0) + ' video';
-showMode(0);
-renderNewUpload();
+/* Gambar ulang seluruh bagian Showcase (dipakai saat awal dan saat bahasa diganti) */
+function refreshShowcase() {
+  const total = SHOWCASE.reduce((sum, mode) => sum + mode.videos.length, 0);
+  $('#video-count').textContent = t('videoCount', total);
+  renderModes();
+  renderFilters();
+  renderVideos();
+  renderNewUpload();
+}
+
+/* Video dengan tanggal upload paling baru (null bila belum ada tanggal) */
+function latestUpload() {
+  const dated = SHOWCASE.flatMap((mode) => mode.videos).filter((video) => video.date);
+  return dated.sort((a, b) => timeOf(b) - timeOf(a))[0] || null;
+}
+
+document.addEventListener('app-language-change', refreshShowcase);
+refreshShowcase();

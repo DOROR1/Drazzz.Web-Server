@@ -5,7 +5,7 @@ const $$ = (selector) => document.querySelectorAll(selector);
 
 const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const jakartaTime = (options) => new Intl.DateTimeFormat('id-ID', { timeZone: 'Asia/Jakarta', ...options });
+const jakartaTime = (options) => new Intl.DateTimeFormat(LOCALES[currentLanguage], { timeZone: 'Asia/Jakarta', ...options });
 
 /* '2026-10-29' -> '29 Okt 2026'  |  dengan jam -> '29 Okt 2026, 21:33 WIB' */
 function formatDate(date) {

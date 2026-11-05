@@ -1359,3 +1359,89 @@ footer {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* PERAPIAN: muncul saat scroll, ringkasan hero, tombol bahasa */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 1.8rem;
+  margin-top: .6rem;
+}
+
+.hero-stats div {
+  display: flex;
+  flex-direction: column;
+  padding-left: .7rem;
+  border-left: 3px solid var(--accent);
+}
+
+.hero-stats b {
+  font: 700 1.5rem/1.1 Raj, sans-serif;
+}
+
+.hero-stats span {
+  font-size: .78rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.lang-toggle {
+  display: flex;
+  flex: none;
+  padding: 0;
+  overflow: hidden;
+  font: 700 .95rem Raj, sans-serif;
+  background: transparent;
+  border: 2px solid #333;
+  border-radius: 4px 10px 4px 10px;
+}
+
+.lang-toggle span {
+  padding: .15rem .6rem;
+  color: var(--muted);
+}
+
+.lang-toggle span.on {
+  color: #000;
+  background: var(--accent);
+}
+
+.engine-card img {
+  width: 64px;
+  height: 64px;
+}
+
+.video-card img {
+  transition: transform .4s;
+}
+
+.video-card:hover img {
+  transform: scale(1.05);
+}
+
+.steps li {
+  position: relative;
+}
+
+@media (min-width: 1000px) {
+  .steps li:not(:last-child)::after {
+    content: "›";
+    position: absolute;
+    top: .9rem;
+    right: -.8rem;
+    font: 700 2rem/1 Raj, sans-serif;
+    color: var(--accent);
+  }
+}

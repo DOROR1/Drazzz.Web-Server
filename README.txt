@@ -5,6 +5,7 @@ js/data/videos.js     DATA showcase: video / thumbnail / link TikTok
 js/data/agents.js     DATA build agent: stat, W-Engine, drive disc, mindscape, warna tema
 js/data/loading.js    DATA loading page: tip dan daftar artwork
 js/utils.js           fungsi bantu (tanggal, warna)
+js/i18n.js            pilihan bahasa Indonesia / English
 js/loading.js         logika loading page
 js/showcase.js        logika bagian Showcase
 js/agent-build.js     logika bagian Build agent
@@ -18,6 +19,7 @@ CARA EDIT CEPAT
 - Ganti mindscape     : js/data/agents.js -> mindscape: 'M0W1'
 - Ganti skill / faksi : js/data/agents.js -> skills: [Basic, Dodge, Assist, Special, Chain, Core], faction: '...'
 - Ganti artwork/tip loading: taruh gambar di assets/img/loading/, daftarkan di js/data/loading.js
-- Ganti teks Tentang  : index.html
+- Ganti teks Tentang  : index.html (terjemahan Inggris ada di atribut data-en pada elemen yang sama)
+- Teks buatan JS (tombol, label) dua bahasa: js/i18n.js -> TEXT
 - Ganti warna/tampilan: css/style.css
 Setelah mengubah file, muat ulang browser dengan Ctrl + F5.
