@@ -32,20 +32,6 @@ function renderHeroStats() {
 renderHeroStats();
 document.addEventListener('app-language-change', renderHeroStats);
 
-/* Bagian halaman muncul pelan saat discroll */
-if (!prefersReducedMotion) {
-  const revealer = new IntersectionObserver((entries) => {
-    entries.filter((entry) => entry.isIntersecting).forEach((entry) => {
-      entry.target.classList.add('is-visible');
-      revealer.unobserve(entry.target);
-    });
-  }, { threshold: 0.06 });
-  $$('.sec').forEach((section) => {
-    section.classList.add('reveal');
-    revealer.observe(section);
-  });
-}
-
 /* Foto hero bergeser pelan mengikuti kursor */
 const heroPanel = $('.art');
 if (!prefersReducedMotion) {

@@ -6,6 +6,7 @@ js/data/agents.js     DATA build agent: stat, W-Engine, drive disc, mindscape, w
 js/data/loading.js    DATA loading page: tip dan daftar artwork
 js/utils.js           fungsi bantu (tanggal, warna)
 js/i18n.js            pilihan bahasa Indonesia / English
+js/motion.js          animasi scroll (scroll halus, teks per kata, kartu bertahap, parallax)
 js/loading.js         logika loading page
 js/showcase.js        logika bagian Showcase
 js/agent-build.js     logika bagian Build agent
@@ -18,7 +19,8 @@ CARA EDIT CEPAT
 - Ganti / tambah build: edit blok agent di js/data/agents.js (petunjuk ada di bagian atas file)
 - Ganti mindscape     : js/data/agents.js -> mindscape: 'M0W1'
 - Ganti skill / faksi : js/data/agents.js -> skills: [Basic, Dodge, Assist, Special, Chain, Core], faction: '...'
-- Ganti artwork/tip loading: taruh gambar di assets/img/loading/, daftarkan di js/data/loading.js
+- Tambah artwork loading: taruh gambar di assets/img/loading/, daftarkan di js/data/loading.js
+                        (position = bagian gambar yang dipertahankan, mis. '50% 0%' bila wajah ada di paling atas)
 - Ganti teks Tentang  : index.html (terjemahan Inggris ada di atribut data-en pada elemen yang sama)
 - Teks buatan JS (tombol, label) dua bahasa: js/i18n.js -> TEXT
 - Ganti warna/tampilan: css/style.css

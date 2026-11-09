@@ -1,11 +1,18 @@
-/* Bagian Showcase: kartu kategori -> filter + urutan -> grid thumbnail -> lightbox + link video.
+/* Bagian Showcase: kartu kategori -> filter + urutan -> grid thumbnail -> lightbox (dengan panah sebelumnya/berikutnya).
    Data: js/data/videos.js */
 
 const lightbox = {
   dialog: $('#lightbox'),
   image: $('#lightbox-image'),
+  title: $('#lightbox-title'),
+  chips: $('#lightbox-chips'),
   caption: $('#lightbox-caption'),
   link: $('#lightbox-link'),
+  count: $('#lightbox-count'),
+  prev: $('#lightbox-prev'),
+  next: $('#lightbox-next'),
+  items: [],       /* daftar { video, mode } yang bisa dijelajahi dengan panah */
+  position: 0,
 };
 
 /* Pilihan yang sedang aktif */
@@ -14,24 +21,59 @@ const view = { modeIndex: 0, group: '', order: 'newest' };
 const thumbnailPath = (video) => 'assets/img/' + video.image;
 const videoCaption = (video) => video.title + (video.points ? ` · ${video.points} PTS` : '');
 const timeOf = (video) => (video.date ? new Date(video.date).getTime() : 0);   /* tanpa tanggal = paling lama */
+const scoreOf = (video) => parseFloat((/([\d.]+)\s*k/i.exec(video.points || '') || [])[1]) || 0;
 
-function openLightbox(video) {
-  lightbox.image.src = thumbnailPath(video);
-  lightbox.image.alt = 'Thumbnail ' + video.title;
-  lightbox.caption.textContent = videoCaption(video) + (video.date ? ' · ' + formatDate(video.date) : '');
-  lightbox.link.href = video.link || TIKTOK_PROFILE;
-  lightbox.link.textContent = video.link ? t('watchOnTikTok') : t('openProfile');
-  lightbox.dialog.showModal();
+/* Video dengan skor tertinggi di sebuah kategori (untuk lencana TOP) */
+function topScoreVideo(mode) {
+  const best = mode.videos.reduce((top, video) => (scoreOf(video) > scoreOf(top) ? video : top), mode.videos[0]);
+  return scoreOf(best) > 0 ? best : null;
 }
 
+/* ---------- Lightbox ---------- */
+function renderLightbox() {
+  const { video, mode } = lightbox.items[lightbox.position];
+  const several = lightbox.items.length > 1;
+  lightbox.image.src = thumbnailPath(video);
+  lightbox.image.alt = 'Thumbnail ' + video.title;
+  lightbox.title.textContent = video.title;
+  lightbox.chips.innerHTML = [mode, video.group, video.points && `${video.points} PTS`]
+    .filter(Boolean).map((text) => `<span>${text}</span>`).join('');
+  lightbox.caption.textContent = video.date ? `${t('uploaded')} ${formatDate(video.date)}` : '';
+  lightbox.link.href = video.link || TIKTOK_PROFILE;
+  lightbox.link.textContent = video.link ? t('watchOnTikTok') : t('openProfile');
+  lightbox.count.textContent = several ? `${lightbox.position + 1} / ${lightbox.items.length}` : '';
+  lightbox.prev.hidden = !several;
+  lightbox.next.hidden = !several;
+  lightbox.prev.setAttribute('aria-label', t('previous'));
+  lightbox.next.setAttribute('aria-label', t('next'));
+}
+
+function openLightbox(items, position = 0) {
+  lightbox.items = items;
+  lightbox.position = position;
+  renderLightbox();
+  if (!lightbox.dialog.open) lightbox.dialog.showModal();
+}
+
+function stepLightbox(direction) {
+  const total = lightbox.items.length;
+  if (total < 2) return;
+  lightbox.position = (lightbox.position + direction + total) % total;
+  renderLightbox();
+}
+
+/* ---------- Daftar video ---------- */
 /* Video pada kategori aktif, sesudah difilter dan diurutkan berdasarkan tanggal */
 function visibleVideos() {
+  const mode = SHOWCASE[view.modeIndex];
   const direction = view.order === 'newest' ? -1 : 1;
-  return SHOWCASE[view.modeIndex].videos
-    .map((video, index) => ({ video, index }))
+  return mode.videos
+    .map((video, index) => ({ video, index, mode: mode.name }))
     .filter(({ video }) => !view.group || video.group === view.group)
     .sort((a, b) => direction * (timeOf(a.video) - timeOf(b.video)) || a.index - b.index);
 }
+
+let modesShown = false;   /* kartu kategori hanya dianimasikan saat pertama muncul */
 
 function renderModes() {
   $('#mode-list').innerHTML = SHOWCASE.map((mode, index) => `
@@ -40,6 +82,8 @@ function renderModes() {
       <span>${mode.name}</span>
       <small>${t('videoCount', mode.videos.length)}</small>
     </button>`).join('');
+  if (!modesShown) revealChildren($('#mode-list'));
+  modesShown = true;
 }
 
 /* Tombol filter dibuat dari nilai "group" pada video; disembunyikan bila hanya ada satu grup */
@@ -57,14 +101,27 @@ function renderFilters() {
     + groups.map((group) => chip(group, group, videos.filter((video) => video.group === group).length)).join('');
 }
 
+const PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>';
+
 function renderVideos() {
+  const top = topScoreVideo(SHOWCASE[view.modeIndex]);
   $('#video-grid').innerHTML = visibleVideos().map(({ video, index }) => `
     <button class="video-card" data-mode="${view.modeIndex}" data-video="${index}">
-      <img src="${thumbnailPath(video)}" alt="Thumbnail ${video.title}" loading="lazy">
-      ${isRecent(video.date) ? '<em class="badge-new">NEW</em>' : ''}
-      <span>${videoCaption(video)}</span>
-      ${video.date ? `<small>${formatDate(video.date)}</small>` : ''}
+      <div class="video-thumb">
+        <img src="${thumbnailPath(video)}" alt="Thumbnail ${video.title}" loading="lazy">
+        ${isRecent(video.date) ? '<em class="badge-new">NEW</em>' : ''}
+        ${video === top ? `<em class="badge-top">★ ${t('topScore')}</em>` : ''}
+        <span class="video-play">${PLAY_ICON}</span>
+      </div>
+      <span class="video-info">
+        <b>${video.title}</b>
+        <span class="video-meta">
+          ${video.points ? `<em class="video-points">${video.points} PTS</em>` : ''}
+          ${video.date ? `<span>${formatDate(video.date)}</span>` : ''}
+        </span>
+      </span>
     </button>`).join('');
+  revealChildren($('#video-grid'));
 }
 
 function showMode(modeIndex) {
@@ -98,9 +155,11 @@ function renderNewUpload() {
         <button class="btn" id="new-upload-thumbnail" type="button">${t('viewThumbnail')}</button>
       </div>
     </div>`;
-  $('#new-upload-thumbnail').addEventListener('click', () => openLightbox(video));
+  $('#new-upload-thumbnail').addEventListener('click', () => openLightbox([{ video, mode }]));
+  if (!panel.classList.contains('item-reveal')) revealItems([panel]);
 }
 
+/* ---------- Event ---------- */
 $('#mode-list').addEventListener('click', (event) => {
   const card = event.target.closest('.mode-card');
   if (card) showMode(Number(card.dataset.index));
@@ -121,10 +180,19 @@ $('#sort-order').addEventListener('change', (event) => {
 
 $('#video-grid').addEventListener('click', (event) => {
   const card = event.target.closest('.video-card');
-  if (card) openLightbox(SHOWCASE[card.dataset.mode].videos[card.dataset.video]);
+  if (!card) return;
+  const items = visibleVideos();
+  const position = items.findIndex((item) => item.index === Number(card.dataset.video));
+  openLightbox(items, position);
 });
 
 $('#lightbox-close').addEventListener('click', () => lightbox.dialog.close());
+lightbox.prev.addEventListener('click', () => stepLightbox(-1));
+lightbox.next.addEventListener('click', () => stepLightbox(1));
+lightbox.dialog.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowLeft') stepLightbox(-1);
+  if (event.key === 'ArrowRight') stepLightbox(1);
+});
 lightbox.dialog.addEventListener('click', (event) => {
   if (event.target === lightbox.dialog) lightbox.dialog.close();
 });
@@ -137,6 +205,7 @@ function refreshShowcase() {
   renderFilters();
   renderVideos();
   renderNewUpload();
+  if (lightbox.dialog.open) renderLightbox();
 }
 
 /* Video dengan tanggal upload paling baru (null bila belum ada tanggal) */

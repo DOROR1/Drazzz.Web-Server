@@ -118,6 +118,9 @@ function showAgent(index) {
     <div class="effective">${effectiveHTML(agent)}</div>
     <div class="set-list">${setListHTML(agent)}</div>
     <div class="disc-grid">${agent.discs.map(discCardHTML).join('')}</div>`;
+  revealChildren(view.querySelector('.stat-grid'));
+  revealChildren(view.querySelector('.skill-row'));
+  revealChildren(view.querySelector('.disc-grid'));
 }
 
 $('#agent-tabs').innerHTML = AGENTS.map((agent, index) => `
@@ -125,6 +128,8 @@ $('#agent-tabs').innerHTML = AGENTS.map((agent, index) => `
     <img src="${imagePath.avatar(agent)}" alt="" loading="lazy">
     ${agent.mindscape ? `<i>${agent.mindscape}</i>` : ''}${agent.name}
   </button>`).join('');
+
+revealChildren($('#agent-tabs'));
 
 $('#agent-tabs').addEventListener('click', (event) => {
   const tab = event.target.closest('.agent-tab');

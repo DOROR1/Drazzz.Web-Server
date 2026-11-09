@@ -42,6 +42,7 @@ const SHOWCASE = [
     name: 'Deadly Assault',
     cover: 'deadly.webp',
     videos: [
+      { image: 't29.webp', title: 'Etheric Other - Truvia', points: '53KK', group: 'Etheric Other - Truvia', link: 'https://www.tiktok.com/@draazzzy/video/7705487702082407701?is_from_webapp=1&sender_device=pc', date: '2026-11-08T01:47:00+07:00' },
       { image: 't5.webp', title: 'Kusarikku', points: '34K', group: 'Kusarikku', link: 'https://www.tiktok.com/@draazzzy/video/7684308769328647444?is_from_webapp=1&sender_device=pc', date: '2026-09-12T00:02:00+07:00' },
       { image: 't16.webp', title: 'Kusarikku', points: '36K', group: 'Kusarikku', link: 'https://www.tiktok.com/@draazzzy/video/7695414080110136596?is_from_webapp=1&sender_device=pc', date: '2026-10-11T22:16:00+07:00' },
       { image: 't6.webp', title: 'Girtabilulu - Stagnant', points: '46K', group: 'Girtabilulu - Stagnant', link: 'https://www.tiktok.com/@draazzzy/video/7684692824448617749?is_from_webapp=1&sender_device=pc', date: '2026-09-13T00:52:00+07:00' },

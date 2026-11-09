@@ -7,7 +7,9 @@
   const pickRandom = (list) => list[Math.floor(Math.random() * list.length)];
   const tip = pickRandom(LOADING_TIPS);
 
-  $('#loading-art').src = 'assets/img/loading/' + pickRandom(LOADING_ARTS);
+  const art = pickRandom(LOADING_ARTS);
+  $('#loading-art').src = 'assets/img/loading/' + art.file;
+  $('#loading-art').style.objectPosition = art.position || '50% 25%';
   $('#loading-icon').src = `assets/img/svg/icon_${tip.icon}.svg`;
   $('#loading-tip').textContent = tip.text;
   $('#loading-no').textContent = 'No.' + tip.no;

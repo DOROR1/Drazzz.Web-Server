@@ -387,72 +387,8 @@ h1 {
 
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.1rem;
-}
-
-.video-card {
-  padding: 0;
-  text-align: left;
-  background: var(--card);
-  border: 3px solid var(--line);
-  border-radius: 14px;
-  overflow: hidden;
-  transition: transform .2s, box-shadow .2s, border-color .2s;
-}
-
-.video-card img {
-  width: 100%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
-}
-
-.video-card span {
-  display: block;
-  padding: .5rem .7rem;
-  font: 700 1rem/1.2 Raj, sans-serif;
-}
-
-.video-card:hover {
-  transform: translate(-3px, -3px);
-  border-color: var(--accent);
-  box-shadow: 6px 6px 0 var(--accent);
-}
-
-dialog {
-  margin: auto;
-  max-width: min(92vw, 520px);
-  max-height: 92vh;
-  padding: 0;
-  border: 3px solid var(--accent);
-  border-radius: 18px;
-  background: var(--card);
-  color: var(--white);
-  overflow: auto;
-}
-
-dialog::backdrop {
-  background: rgba(0, 0, 0, .85);
-}
-
-dialog img {
-  width: 100%;
-}
-
-dialog p {
-  padding: .9rem 1.1rem;
-  font: 700 1.2rem Raj, sans-serif;
-}
-
-dialog button {
-  position: absolute;
-  right: .6rem;
-  top: .6rem;
-  background: #000;
-  border: 2px solid var(--white);
-  border-radius: 8px;
-  padding: .1rem .7rem;
-  font: 700 1.1rem Raj, sans-serif;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.3rem;
 }
 
 /* BADGE NEW + PANEL NEW UPLOAD */
@@ -496,24 +432,6 @@ dialog button {
 
 .new-upload .btns {
   margin-top: 1rem;
-}
-
-.video-card {
-  position: relative;
-}
-
-.video-card .badge-new {
-  position: absolute;
-  top: .5rem;
-  left: .5rem;
-}
-
-.video-card small {
-  display: block;
-  padding: 0 .7rem .55rem;
-  color: var(--muted);
-  font-size: .8rem;
-  margin-top: -.25rem;
 }
 
 @media (max-width: 700px) {
@@ -864,10 +782,6 @@ dialog button {
 
 [hidden] {
   display: none!important;
-}
-
-dialog .btn {
-  margin: 0 1.1rem 1.1rem;
 }
 
 /* PROYEK */
@@ -1361,17 +1275,6 @@ footer {
 }
 
 /* PERAPIAN: muncul saat scroll, ringkasan hero, tombol bahasa */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1);
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
 .hero-stats {
   display: flex;
   flex-wrap: wrap;
@@ -1423,14 +1326,6 @@ footer {
   height: 64px;
 }
 
-.video-card img {
-  transition: transform .4s;
-}
-
-.video-card:hover img {
-  transform: scale(1.05);
-}
-
 .steps li {
   position: relative;
 }
@@ -1443,5 +1338,364 @@ footer {
     right: -.8rem;
     font: 700 2rem/1 Raj, sans-serif;
     color: var(--accent);
+  }
+}
+
+/* ANIMASI SCROLL (aktif bila html punya kelas "motion", diatur js/motion.js) */
+html.has-smooth {
+  scroll-behavior: auto;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 98;
+  width: 100%;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* teks muncul per kata */
+html.motion .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: .14em;
+  margin-bottom: -.14em;
+}
+
+html.motion .w > span {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform .9s cubic-bezier(.2, .8, .2, 1);
+  transition-delay: calc(min(var(--i, 0), 26) * 32ms);
+}
+
+html.motion .text-reveal.is-in .w > span {
+  transform: none;
+}
+
+html.motion .sec h2.text-reveal::after {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(.2, .8, .2, 1) .2s;
+}
+
+html.motion .sec h2.text-reveal.is-in::after {
+  transform: scaleX(1);
+}
+
+/* kartu dan panel muncul bertahap */
+html.motion .item-reveal:not(.is-in) {
+  opacity: 0;
+}
+
+html.motion .item-reveal.is-in {
+  animation: item-in .9s cubic-bezier(.2, .8, .2, 1) backwards;
+  animation-delay: calc(min(var(--i, 0), 12) * 70ms);
+}
+
+html.motion .video-card.is-in img,
+html.motion .new-upload.is-in img {
+  animation: image-in 1.5s cubic-bezier(.2, .8, .2, 1) backwards;
+  animation-delay: calc(min(var(--i, 0), 12) * 70ms);
+}
+
+@keyframes item-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(.97);
+  }
+}
+
+@keyframes image-in {
+  from {
+    transform: scale(1.3);
+  }
+}
+
+/* KARTU VIDEO */
+.video-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  text-align: left;
+  background: var(--card);
+  border: 3px solid var(--line);
+  border-radius: 16px 6px 16px 6px;
+  transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .25s ease-out, border-color .25s, box-shadow .25s;
+}
+
+.video-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 14px 36px color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+.video-thumb {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+}
+
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s cubic-bezier(.2, .8, .2, 1);
+}
+
+.video-card:hover .video-thumb img {
+  transform: scale(1.07);
+}
+
+/* kilau yang lewat saat kartu disorot */
+.video-thumb::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -90%;
+  width: 45%;
+  height: 140%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .3), transparent);
+  transform: skewX(-18deg);
+  transition: left .9s ease;
+  pointer-events: none;
+}
+
+.video-card:hover .video-thumb::after {
+  left: 130%;
+}
+
+.video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  margin: -1.8rem 0 0 -1.8rem;
+  color: #000;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 .5rem color-mix(in srgb, var(--accent) 30%, transparent);
+  opacity: 0;
+  transform: scale(.6);
+  transition: opacity .3s, transform .3s cubic-bezier(.2, .8, .2, 1.4);
+}
+
+.video-play svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: .15rem;
+  fill: currentColor;
+}
+
+.video-card:hover .video-play,
+.video-card:focus-visible .video-play {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.video-card .badge-new,
+.badge-top {
+  position: absolute;
+  top: .6rem;
+  z-index: 2;
+}
+
+.video-card .badge-new {
+  left: .6rem;
+}
+
+.badge-top {
+  right: .6rem;
+  padding: 0 .45rem;
+  font: 700 .75rem/1.3 Raj, sans-serif;
+  font-style: normal;
+  letter-spacing: .06em;
+  color: var(--accent);
+  background: #000;
+  border: 2px solid var(--accent);
+  border-radius: 3px;
+}
+
+.video-info {
+  display: grid;
+  gap: .4rem;
+  padding: .75rem .85rem .9rem;
+}
+
+.video-info b {
+  font: 700 1.1rem/1.2 Raj, sans-serif;
+}
+
+.video-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem .7rem;
+  font-size: .82rem;
+  color: var(--muted);
+}
+
+.video-points {
+  padding: 0 .55rem;
+  font: 700 .9rem Raj, sans-serif;
+  font-style: normal;
+  color: #000;
+  background: var(--accent);
+  border-radius: 3px 8px 3px 8px;
+}
+
+@media (hover: none) {
+  .video-play {
+    opacity: .9;
+    transform: scale(.85);
+  }
+}
+
+/* LIGHTBOX */
+dialog {
+  width: min(94vw, 980px);
+  max-height: 92vh;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  color: var(--white);
+  background: var(--card);
+  border: 3px solid var(--accent);
+  border-radius: 20px 6px 20px 6px;
+}
+
+dialog[open] {
+  animation: dialog-in .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, .88);
+  backdrop-filter: blur(6px);
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(.97);
+  }
+}
+
+.lightbox-body {
+  display: grid;
+  grid-template-columns: minmax(0, 420px) 1fr;
+  max-height: 92vh;
+}
+
+.lightbox-body img {
+  width: 100%;
+  height: 100%;
+  max-height: 92vh;
+  object-fit: contain;
+  background: #000;
+}
+
+.lightbox-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .9rem;
+  padding: 2rem 2.4rem;
+}
+
+.lightbox-info h3 {
+  font: 700 clamp(1.5rem, 3vw, 2.2rem)/1.1 ZZZ, sans-serif;
+  letter-spacing: -.03em;
+}
+
+.lightbox-info p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.lightbox-info .btn {
+  align-self: flex-start;
+}
+
+.lightbox-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.lightbox-chips span {
+  padding: 0 .7rem;
+  font: 700 .95rem Raj, sans-serif;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 4px 10px 4px 10px;
+}
+
+.lightbox-count {
+  font: 700 .9rem Raj, sans-serif;
+  letter-spacing: .06em;
+  color: var(--muted);
+}
+
+#lightbox-close {
+  position: absolute;
+  top: .8rem;
+  right: .8rem;
+  z-index: 3;
+  padding: .1rem .8rem;
+  font: 700 1.05rem Raj, sans-serif;
+  color: var(--white);
+  background: #000;
+  border: 2px solid var(--white);
+  border-radius: 8px;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  margin-top: -1.4rem;
+  padding: 0;
+  font: 700 1.8rem/1 Raj, sans-serif;
+  color: #000;
+  background: var(--accent);
+  border: 0;
+  border-radius: 50%;
+}
+
+.lightbox-nav.prev {
+  left: .8rem;
+}
+
+.lightbox-nav.next {
+  right: .8rem;
+}
+
+@media (max-width: 760px) {
+  .lightbox-body {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+
+  .lightbox-body img {
+    max-height: 55vh;
+  }
+
+  .lightbox-info {
+    padding: 1.2rem 1.4rem 1.6rem;
   }
 }

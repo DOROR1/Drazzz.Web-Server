@@ -1,13 +1,34 @@
 /* DATA LOADING PAGE (sumber: tips resmi dari game)
    LOADING_ARTS  -> artwork di assets/img/loading/ (dipilih acak tiap dibuka)
+                    position = bagian gambar yang dipertahankan saat dipotong: 'x% y%'
+                    (y kecil = bagian atas, mis. '50% 0%' untuk wajah di paling atas)
    LOADING_TIPS  -> icon: hollow | city | combat (file assets/img/svg/icon_NAMA.svg)
                     category = label kecil di kiri bawah, no = nomor tip, text = isi tip */
 
 const LOADING_ARTS = [
-  'wallpaper-1.webp', 'wallpaper-2.webp', 'wallpaper-3.webp', 'wallpaper-4.webp',
-  'wallpaper-5.webp', 'ellen.webp', 'burnice.webp', 'miyabi.webp',
-  'astra.webp', 'lycaon.webp', 'anby.webp', 'nicole.webp',
-  'jane.webp', 'grace.webp',
+  { file: 'anby.webp', position: '50% 22%' },
+  { file: 'astra.webp', position: '50% 22%' },
+  { file: 'burnice.webp', position: '50% 22%' },
+  { file: 'ellen.webp', position: '50% 22%' },
+  { file: 'extra-1.webp', position: '50% 22%' },
+  { file: 'extra-2.webp', position: '50% 22%' },
+  { file: 'extra-3.webp', position: '50% 22%' },
+  { file: 'extra-4.webp', position: '50% 20%' },
+  { file: 'extra-5.webp', position: '50% 32%' },
+  { file: 'extra-6.webp', position: '50% 22%' },
+  { file: 'extra-7.webp', position: '50% 0%' },
+  { file: 'extra-8.webp', position: '50% 0%' },
+  { file: 'extra-9.webp', position: '50% 0%' },
+  { file: 'grace.webp', position: '50% 22%' },
+  { file: 'jane.webp', position: '50% 40%' },
+  { file: 'lycaon.webp', position: '50% 22%' },
+  { file: 'miyabi.webp', position: '50% 22%' },
+  { file: 'nicole.webp', position: '50% 20%' },
+  { file: 'wallpaper-1.webp', position: '50% 50%' },
+  { file: 'wallpaper-2.webp', position: '40% 50%' },
+  { file: 'wallpaper-3.webp', position: '55% 50%' },
+  { file: 'wallpaper-4.webp', position: '50% 50%' },
+  { file: 'wallpaper-5.webp', position: '50% 50%' },
 ];
 
 const LOADING_TIPS = [

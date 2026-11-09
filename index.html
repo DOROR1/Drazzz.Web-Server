@@ -139,9 +139,18 @@
 
 <dialog id="lightbox">
   <button type="button" id="lightbox-close" data-en="Close">Tutup</button>
-  <img id="lightbox-image" alt="">
-  <p id="lightbox-caption"></p>
-  <a class="btn p" id="lightbox-link" target="_blank" rel="noopener">Tonton video</a>
+  <button class="lightbox-nav prev" id="lightbox-prev" type="button">&#8249;</button>
+  <button class="lightbox-nav next" id="lightbox-next" type="button">&#8250;</button>
+  <div class="lightbox-body">
+    <img id="lightbox-image" alt="">
+    <div class="lightbox-info">
+      <h3 id="lightbox-title"></h3>
+      <div class="lightbox-chips" id="lightbox-chips"></div>
+      <p id="lightbox-caption"></p>
+      <a class="btn p" id="lightbox-link" target="_blank" rel="noopener">Tonton video</a>
+      <small class="lightbox-count" id="lightbox-count"></small>
+    </div>
+  </div>
 </dialog>
 
 <script src="js/data/videos.js"></script>
@@ -149,6 +158,7 @@
 <script src="js/data/loading.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/i18n.js"></script>
+<script src="js/motion.js"></script>
 <script src="js/loading.js"></script>
 <script src="js/showcase.js"></script>
 <script src="js/agent-build.js"></script>
