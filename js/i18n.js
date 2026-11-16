@@ -23,6 +23,7 @@ const TEXT = {
     statVideos: 'Video',
     statAgents: 'Agent',
     statLatest: 'Upload terbaru',
+    agentCount: (n) => `${n} agent`,
   },
   en: {
     all: 'All',
@@ -41,6 +42,7 @@ const TEXT = {
     statVideos: 'Videos',
     statAgents: 'Agents',
     statLatest: 'Latest upload',
+    agentCount: (n) => `${n} agents`,
   },
 };
 

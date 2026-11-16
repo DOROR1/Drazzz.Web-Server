@@ -27,6 +27,12 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: Octin;
+  src: url(../assets/fonts/OctinCollege.otf);
+  font-display: swap;
+}
+
 @property --accent {
   syntax: "<color>";
   inherits: true;
@@ -1699,3 +1705,178 @@ dialog::backdrop {
     padding: 1.2rem 1.4rem 1.6rem;
   }
 }
+
+/* ============================================================
+   HALAMAN TERPISAH (Beranda, Showcase, Build, Proyek)
+   ============================================================ */
+
+/* perpindahan antarhalaman memudar halus; nav bawah tetap di tempat */
+@view-transition { navigation: none; }
+.nav { view-transition-name: nav; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .25s; }
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+
+/* loading penuh hanya di halaman pertama (js/loading.js) */
+html.skip-loading #loading { display: none; }
+
+/* judul halaman (Showcase, Build, Proyek) */
+.page-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .9rem;
+  padding: 2.5rem 0 .5rem;
+}
+.page-head h1 { font-size: clamp(2.6rem, 8vw, 5.2rem); }
+.page-head .lead { max-width: 60ch; }
+.page-head + .sec { padding-top: 1.5rem; }
+
+/* kartu Jelajahi di Beranda */
+.explore {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+.explore-card {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  padding: 1.1rem;
+  text-decoration: none;
+  transition: border-color .2s, translate .2s;
+}
+.explore-card:hover, .explore-card:focus-visible { border-color: var(--accent); translate: 0 -4px; }
+.explore-card h3 { font: 700 1.7rem/1.1 Raj, sans-serif; }
+.explore-card p { color: var(--muted); }
+.explore-card .go { margin-top: auto; padding-top: .4rem; font: 700 1.1rem Raj, sans-serif; color: var(--accent); }
+.explore-thumb {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: 50% 0;
+  border-radius: 16px 4px 16px 4px;
+}
+.explore-avatars { display: grid; grid-template-columns: repeat(6, 1fr); gap: .45rem; align-content: start; }
+.explore-avatars img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; background: #1a1a1a; }
+.explore-card .chip-list { align-content: flex-start; min-height: 5.6rem; }
+@media (max-width: 860px) { .explore { grid-template-columns: 1fr; } }
+
+
+/* ============================================================
+   WARNA TEMA PER AGENT, FOTO HERO, DAN NAV BAWAH BARU
+   ============================================================ */
+:root { --accent-dark: color-mix(in srgb, var(--accent) 72%, #000); }
+
+/* hero: foto + pemilih agent */
+.hero-side { display: grid; gap: .85rem; align-content: center; }
+.hero-art {
+  scale: 1;
+}
+.art::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 36%;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(0, 0, 0, .88), transparent);
+  pointer-events: none;
+}
+.hero-name {
+  position: absolute;
+  z-index: 2;
+  left: 1.2rem;
+  bottom: 1rem;
+  display: grid;
+  gap: .15rem;
+  text-shadow: 0 2px 14px #000;
+  pointer-events: none;
+}
+.hero-name b { font: 2.4rem/1 Octin, sans-serif; letter-spacing: .02em; }
+.hero-name small { font: 700 1rem Raj, sans-serif; color: var(--accent); }
+.picker { display: grid; grid-template-columns: repeat(9, 1fr); gap: .45rem; }
+.pick {
+  padding: 0;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  background: #111;
+  transition: border-color .15s, scale .15s, box-shadow .2s;
+}
+.pick img { width: 100%; height: 100%; object-fit: cover; }
+.pick:hover { scale: 1.08; border-color: var(--muted); }
+.pick[aria-pressed="true"] {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 38%, transparent);
+}
+@media (max-width: 600px) { .picker { grid-template-columns: repeat(6, 1fr); } }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes float { 50% { transform: translateY(-8px); } }
+}
+
+/* build: foto agent utuh di kolom kiri, stat di kanan */
+.build-top { display: grid; grid-template-columns: minmax(0, 420px) 1fr; gap: 1.25rem; align-items: start; }
+.build-art {
+  position: sticky;
+  top: 1rem;
+  overflow: hidden;
+  border: 3px solid var(--accent);
+  border-radius: 24px 6px 24px 6px;
+  background: radial-gradient(circle at 70% 35%, color-mix(in srgb, var(--accent) 38%, transparent), #0a0a0a 72%);
+}
+.build-art img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; }
+.build-main { display: grid; gap: 1.1rem; min-width: 0; }
+@media (max-width: 900px) { .build-top { grid-template-columns: 1fr; } .build-art { position: static; } }
+
+/* NAV BAWAH: lencana agent, tab miring, font Octin */
+.nav {
+  gap: 1.4rem;
+  border-top: 0;
+  padding-top: .55rem;
+  font: 1.35rem/1 Octin, sans-serif;
+  letter-spacing: .03em;
+}
+.nav::before, .nav::after { content: ""; position: absolute; top: -3px; left: 0; height: 3px; }
+.nav::before { right: 0; background: var(--line); }
+.nav::after { width: min(34%, 420px); background: var(--accent); clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+.sig { gap: .65rem; text-decoration: none; color: var(--white); font-size: 1.2rem; }
+.sig img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; background: #111; border: 2px solid var(--accent); }
+.nav ul { gap: .2rem; }
+.nav li a { padding: .5rem 1.4rem; border-radius: 0; color: var(--muted); transition: color .15s; }
+.nav li a:hover { background: none; color: var(--white); }
+.nav li a.on { color: #000; background: var(--accent); clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+.yr { font: 1.15rem/1 Octin, sans-serif; font-variant-numeric: tabular-nums; color: var(--muted); }
+.lang-toggle { font: 1.05rem/1 Octin, sans-serif; }
+@media (max-width: 760px) { .sig span, .yr { display: none; } .nav li a { padding: .5rem .9rem; } }
+
+/* ===== v4: nav bawah, tema agent, transisi pindah halaman ===== */
+:root { --nav-font: Raj, sans-serif; transition: --accent .35s ease; }  /* ganti font nav cukup di --nav-font */
+
+.nav { gap: 1rem; background: linear-gradient(0deg, #000, #0c0c0c); }
+.nav li a, .sig, .yr, .lang-toggle { font-family: var(--nav-font); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.nav li a { font-size: 1rem; line-height: 1; padding: .7rem 1.3rem; }
+.sig { font-size: 1rem; line-height: 1; color: var(--white); }
+.yr, .lang-toggle { font-size: .95rem; line-height: 1; letter-spacing: .05em; font-variant-numeric: tabular-nums; }
+
+.hero-side .art { background: radial-gradient(110% 85% at 72% 28%, color-mix(in srgb, var(--accent) 42%, transparent), transparent 65%), #060606; }
+.pick:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+
+/* Transisi pindah halaman: dua pita miring (warna agent lalu hitam) menyapu layar. Logikanya di js/transition.js */
+.pt { position: fixed; top: 0; bottom: 0; left: -25vh; width: calc(100vw + 50vh); z-index: 90; pointer-events: none; }
+.pt i {
+  position: absolute; inset: 0; transform: translateX(-102%);
+  clip-path: polygon(18vh 0, 100% 0, calc(100% - 18vh) 100%, 0 100%);
+  transition: transform .42s cubic-bezier(.75, 0, .2, 1);
+}
+.pt i:first-child { background: var(--accent); }
+.pt i:last-child { display: grid; place-items: center; background: #050505; }
+.pt img { height: 11vh; width: auto; }
+.pt.is-in i { transform: none; }
+.pt.is-in i:last-child { transition-delay: .06s; }
+.pt.is-out i { transform: translateX(102%); }
+.pt.is-out i:first-child { transition-delay: .06s; }
+.pt.pt-reset i { transition: none; }
+html.pt-enter .pt i { transform: none; transition: none; }
+html.pt-enter::after { content: ""; position: fixed; inset: 0; z-index: 89; background: #050505; animation: pt-failsafe .01s 2.5s forwards; }
+@keyframes pt-failsafe { to { opacity: 0; visibility: hidden; } }

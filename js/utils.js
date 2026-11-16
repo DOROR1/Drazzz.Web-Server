@@ -7,6 +7,17 @@ const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matc
 
 const jakartaTime = (options) => new Intl.DateTimeFormat(LOCALES[currentLanguage], { timeZone: 'Asia/Jakarta', ...options });
 
+const slugify = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+
+/* tanpa tanggal = paling lama */
+const timeOf = (video) => (video.date ? new Date(video.date).getTime() : 0);
+
+/* Video dengan tanggal upload paling baru (null bila belum ada tanggal) */
+function latestUpload() {
+  const dated = SHOWCASE.flatMap((mode) => mode.videos).filter((video) => video.date);
+  return dated.sort((a, b) => timeOf(b) - timeOf(a))[0] || null;
+}
+
 /* '2026-10-29' -> '29 Okt 2026'  |  dengan jam -> '29 Okt 2026, 21:33 WIB' */
 function formatDate(date) {
   const hasTime = date.length > 10;

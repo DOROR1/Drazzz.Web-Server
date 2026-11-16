@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title data-en="Showcase | Drazzz.">Showcase | Drazzz.</title>
+<meta name="description" content="Video showcase Zenless Zone Zero oleh Drazzz.: Shiyu Defense, Deadly Assault, dan Annihilation Simulacrum." data-en="Zenless Zone Zero showcase videos by Drazzz.: Shiyu Defense, Deadly Assault, and Annihilation Simulacrum.">
+<script>try{if(sessionStorage.getItem('drazzz-loading-seen')==='1')document.documentElement.classList.add('skip-loading')}catch(e){}</script>
+<script>try{var a=JSON.parse(localStorage.getItem('drazzz-agent')),s=document.documentElement.style;if(a&&a.accent){var d=[1,3,5].map(function(i){return parseInt(a.accent.substr(i,2),16)});s.setProperty('--accent',a.accent);s.setProperty('--accent-rgb',d.join(' '));s.setProperty('--accent-dark','rgb('+d.map(function(v){return v*.72|0}).join(' ')+')')}}catch(e){}</script>
+<script>try{if(sessionStorage.getItem('drazzz-pt')==='1'){sessionStorage.removeItem('drazzz-pt');document.documentElement.classList.add('pt-enter')}}catch(e){}</script>
+<link rel="stylesheet" href="css/style.css">
+<noscript><style>#loading{display:none}</style></noscript>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+
+<!-- LOADING PAGE: data di js/data/loading.js -->
+<div id="loading" role="status" aria-label="Memuat">
+  <div class="loading-left">
+    <div class="loading-mode-header"><img id="loading-icon" alt=""></div>
+    <p class="loading-tip" id="loading-tip"></p>
+    <div class="loading-footer">
+      <img class="loading-footer-icons" src="assets/img/svg/icon_loading_bottom.svg" alt="">
+      <div class="loading-meta">
+        <div class="loading-no" id="loading-no"></div>
+        <div class="loading-category" id="loading-category"></div>
+      </div>
+    </div>
+  </div>
+  <div class="loading-right">
+    <img class="loading-art" id="loading-art" alt="">
+    <img class="loading-logo" src="assets/img/logo_white.png" alt="ZZZ">
+    <img class="loading-now" src="assets/img/now-loading.webp" alt="Now loading, Bangboo N.E.T.">
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="page-head">
+    <p class="chip" data-en="@draazzzy on TikTok">@draazzzy di TikTok</p>
+    <h1>Showcase</h1>
+    <p class="lead" data-en="Pick a category, filter by room or boss, then click a thumbnail to watch the video on TikTok.">Pilih kategori, saring berdasarkan room atau boss, lalu klik thumbnail untuk menonton videonya di TikTok.</p>
+    <span class="tag" id="video-count"></span>
+  </header>
+
+<!-- SHOWCASE: data di js/data/videos.js -->
+  <section class="sec" id="showcase">
+    <div class="new-upload panel" id="new-upload" hidden></div>
+    <div class="mode-list" id="mode-list"></div>
+    <div class="video-toolbar" id="video-toolbar">
+      <div class="filter-list" id="filter-list"></div>
+      <label class="sort-box"><span data-en="Sort by">Urutkan</span>
+        <select id="sort-order">
+          <option value="newest" data-en="Newest first">Terbaru ke terlama</option>
+          <option value="oldest" data-en="Oldest first">Terlama ke terbaru</option>
+        </select>
+      </label>
+    </div>
+    <div class="video-grid" id="video-grid"></div>
+  </section>
+
+  
+<!-- KONTAK -->
+  <section class="sec" id="contact">
+    <div class="contact panel">
+      <div>
+        <h3 data-en="Contact me">Hubungi aku</h3>
+        <p>dararidowi@gmail.com &middot; TikTok @draazzzy</p>
+      </div>
+      <div class="btns">
+        <a class="btn p" href="mailto:dararidowi@gmail.com" data-en="Send email">Kirim email</a>
+        <a class="btn" href="https://www.tiktok.com/@draazzzy" target="_blank" rel="noopener" data-en="Open TikTok">Buka TikTok</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer data-en="Zenless Zone Zero assets belong to HoYoverse. Used as fan content for a school assignment, with no commercial purpose.">Aset Zenless Zone Zero adalah milik HoYoverse. Dipakai sebagai fan content untuk tugas sekolah, tanpa tujuan komersial.</footer>
+
+<nav class="nav" aria-label="Navigasi utama">
+  <a class="sig" id="nav-agent" href="build.html#ellen"><img src="assets/img/b/ellen_av.webp" alt=""><span>Ellen Joe</span></a>
+  <ul><li><a href="index.html" data-en="Home">Beranda</a></li><li><a href="showcase.html" class="on" aria-current="page">Showcase</a></li><li><a href="build.html">Build</a></li><li><a href="proyek.html" data-en="Project">Proyek</a></li></ul>
+  <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Bahasa / Language"><span data-lang="id">ID</span><span data-lang="en">EN</span></button>
+  <b class="yr" id="clock"></b>
+</nav>
+
+<dialog id="lightbox">
+  <button type="button" id="lightbox-close" data-en="Close">Tutup</button>
+  <button class="lightbox-nav prev" id="lightbox-prev" type="button">&#8249;</button>
+  <button class="lightbox-nav next" id="lightbox-next" type="button">&#8250;</button>
+  <div class="lightbox-body">
+    <img id="lightbox-image" alt="">
+    <div class="lightbox-info">
+      <h3 id="lightbox-title"></h3>
+      <div class="lightbox-chips" id="lightbox-chips"></div>
+      <p id="lightbox-caption"></p>
+      <a class="btn p" id="lightbox-link" target="_blank" rel="noopener">Tonton video</a>
+      <small class="lightbox-count" id="lightbox-count"></small>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/data/videos.js"></script>
+<script src="js/data/loading.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/transition.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/loading.js"></script>
+<script src="js/showcase.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

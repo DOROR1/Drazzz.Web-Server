@@ -6,6 +6,9 @@
 <meta name="theme-color" content="#000000">
 <title data-en="Drazzz. | Portfolio">Drazzz. | Portofolio</title>
 <meta name="description" content="Portofolio Drazzz.: desain Canva dan konten showcase Zenless Zone Zero." data-en="Drazzz. portfolio: Canva design and Zenless Zone Zero showcase content.">
+<script>try{if(sessionStorage.getItem('drazzz-loading-seen')==='1')document.documentElement.classList.add('skip-loading')}catch(e){}</script>
+<script>try{var a=JSON.parse(localStorage.getItem('drazzz-agent')),s=document.documentElement.style;if(a&&a.accent){var d=[1,3,5].map(function(i){return parseInt(a.accent.substr(i,2),16)});s.setProperty('--accent',a.accent);s.setProperty('--accent-rgb',d.join(' '));s.setProperty('--accent-dark','rgb('+d.map(function(v){return v*.72|0}).join(' ')+')')}}catch(e){}</script>
+<script>try{if(sessionStorage.getItem('drazzz-pt')==='1'){sessionStorage.removeItem('drazzz-pt');document.documentElement.classList.add('pt-enter')}}catch(e){}</script>
 <link rel="stylesheet" href="css/style.css">
 <noscript><style>#loading{display:none}</style></noscript>
 </head>
@@ -33,8 +36,7 @@
 </div>
 
 <main class="wrap">
-
-  <!-- HERO -->
+<!-- HERO -->
   <header class="hero" id="home">
     <div class="copy">
       <p class="chip" data-en="@draazzzy on TikTok">@draazzzy di TikTok</p>
@@ -42,18 +44,23 @@
       <p class="script">showcase maker</p>
       <p class="lead" data-en="Zenless Zone Zero showcase content creator and Canva designer. This website is a class project: built on VirtualBox and published through Cloudflare Tunnel.">Kreator konten showcase Zenless Zone Zero dan pembuat desain di Canva. Website ini adalah tugas: dibangun di VirtualBox dan dipublikasikan lewat Cloudflare Tunnel.</p>
       <div class="btns">
-        <a class="btn p" href="#showcase" data-en="View showcase">Lihat showcase</a>
+        <a class="btn p" href="showcase.html" data-en="View showcase">Lihat showcase</a>
         <a class="btn" href="https://www.tiktok.com/@draazzzy" target="_blank" rel="noopener" data-en="Open TikTok">Buka TikTok</a>
       </div>
       <div class="hero-stats" id="hero-stats"></div>
     </div>
-    <div class="art panel">
-      <div class="hero-bg-text" aria-hidden="true"></div>
-      <img class="hero-art" id="hero-art" src="assets/img/hero/ellen.webp" alt="Ilustrasi agent Ellen Joe dari Zenless Zone Zero">
+    <div class="hero-side">
+      <div class="art panel">
+        <div class="hero-bg-text" aria-hidden="true"></div>
+        <img class="hero-art" id="hero-art" alt="">
+        <div class="hero-name"><b id="hero-name"></b><small id="hero-faction"></small></div>
+      </div>
+      <div class="picker" id="hero-picker" role="group" aria-label="Pilih agent / Pick an agent"></div>
     </div>
   </header>
 
-  <!-- TENTANG -->
+  
+<!-- TENTANG -->
   <section class="sec" id="about">
     <h2 data-en="About">Tentang</h2>
     <div class="two">
@@ -70,43 +77,33 @@
     </div>
   </section>
 
-  <!-- SHOWCASE: data di js/data/videos.js -->
-  <section class="sec" id="showcase">
-    <h2>Showcase <span class="tag" id="video-count"></span></h2>
-    <div class="new-upload panel" id="new-upload" hidden></div>
-    <div class="mode-list" id="mode-list"></div>
-    <div class="video-toolbar" id="video-toolbar">
-      <div class="filter-list" id="filter-list"></div>
-      <label class="sort-box"><span data-en="Sort by">Urutkan</span>
-        <select id="sort-order">
-          <option value="newest" data-en="Newest first">Terbaru ke terlama</option>
-          <option value="oldest" data-en="Oldest first">Terlama ke terbaru</option>
-        </select>
-      </label>
+  
+  <!-- JELAJAHI -->
+  <section class="sec" id="explore">
+    <h2 data-en="Explore">Jelajahi</h2>
+    <div class="explore">
+      <a class="explore-card panel" href="showcase.html">
+        <img class="explore-thumb" id="explore-thumb" alt="" src="assets/img/t30.webp">
+        <h3>Showcase</h3>
+        <p id="explore-showcase-meta"></p>
+        <span class="go" data-en="Open showcase">Buka showcase</span>
+      </a>
+      <a class="explore-card panel" href="build.html">
+        <div class="explore-avatars" id="explore-avatars"></div>
+        <h3>Build agent</h3>
+        <p id="explore-build-meta"></p>
+        <span class="go" data-en="Open builds">Buka build</span>
+      </a>
+      <a class="explore-card panel" href="proyek.html">
+        <div class="chip-list"><span>VirtualBox</span><span>Barepod</span><span>SumoPod</span><span>Cloudflare Tunnel</span></div>
+        <h3 data-en="From VM to the internet">Dari VM ke internet</h3>
+        <p data-en="How this website was built and published for the class assignment.">Cara website ini dibangun dan dipublikasikan untuk tugas sekolah.</p>
+        <span class="go" data-en="Open project">Buka proyek</span>
+      </a>
     </div>
-    <div class="video-grid" id="video-grid"></div>
   </section>
 
-  <!-- BUILD AGENT: data di js/data/agents.js -->
-  <section class="sec" id="build">
-    <h2>Build agent</h2>
-    <div class="agent-tabs" id="agent-tabs"></div>
-    <div class="build-view panel" id="build-view"></div>
-  </section>
-
-  <!-- PROYEK -->
-  <section class="sec" id="proyek">
-    <h2 data-en="From VM to the internet">Dari VM ke internet</h2>
-    <ol class="steps">
-      <li><b data-en="Build the website">Bangun website</b><p data-en="A web server runs on a VirtualBox virtual machine.">Web server berjalan di mesin virtual VirtualBox.</p></li>
-      <li><b data-en="Install the panel">Pasang panel</b><p data-en="Barepod panel to manage the server.">Panel Barepod untuk mengelola server.</p></li>
-      <li><b data-en="Buy a domain">Beli domain</b><p data-en="The domain name is bought through SumoPod.">Nama domain dibeli lewat SumoPod.</p></li>
-      <li><b data-en="Connect the tunnel">Sambungkan tunnel</b><p data-en="Cloudflare Tunnel points the domain to the VM.">Cloudflare Tunnel mengarahkan domain ke VM.</p></li>
-      <li><b data-en="Online">Online</b><p data-en="The website can be opened from the internet.">Website bisa dibuka dari internet.</p></li>
-    </ol>
-  </section>
-
-  <!-- KONTAK -->
+<!-- KONTAK -->
   <section class="sec" id="contact">
     <div class="contact panel">
       <div>
@@ -124,44 +121,22 @@
 <footer data-en="Zenless Zone Zero assets belong to HoYoverse. Used as fan content for a school assignment, with no commercial purpose.">Aset Zenless Zone Zero adalah milik HoYoverse. Dipakai sebagai fan content untuk tugas sekolah, tanpa tujuan komersial.</footer>
 
 <nav class="nav" aria-label="Navigasi utama">
-  <div class="sig"><img src="assets/img/logo_white.png" alt="ZZZ"><span>Signal received // online</span></div>
-  <ul>
-    <li><a href="#home" class="on">Home</a></li>
-    <li><a href="#about" data-en="About">Tentang</a></li>
-    <li><a href="#showcase">Showcase</a></li>
-    <li><a href="#build">Build</a></li>
-    <li><a href="#proyek" data-en="Project">Proyek</a></li>
-    <li><a href="#contact" data-en="Contact">Kontak</a></li>
-  </ul>
+  <a class="sig" id="nav-agent" href="build.html#ellen"><img src="assets/img/b/ellen_av.webp" alt=""><span>Ellen Joe</span></a>
+  <ul><li><a href="index.html" class="on" aria-current="page" data-en="Home">Beranda</a></li><li><a href="showcase.html">Showcase</a></li><li><a href="build.html">Build</a></li><li><a href="proyek.html" data-en="Project">Proyek</a></li></ul>
   <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Bahasa / Language"><span data-lang="id">ID</span><span data-lang="en">EN</span></button>
   <b class="yr" id="clock"></b>
 </nav>
-
-<dialog id="lightbox">
-  <button type="button" id="lightbox-close" data-en="Close">Tutup</button>
-  <button class="lightbox-nav prev" id="lightbox-prev" type="button">&#8249;</button>
-  <button class="lightbox-nav next" id="lightbox-next" type="button">&#8250;</button>
-  <div class="lightbox-body">
-    <img id="lightbox-image" alt="">
-    <div class="lightbox-info">
-      <h3 id="lightbox-title"></h3>
-      <div class="lightbox-chips" id="lightbox-chips"></div>
-      <p id="lightbox-caption"></p>
-      <a class="btn p" id="lightbox-link" target="_blank" rel="noopener">Tonton video</a>
-      <small class="lightbox-count" id="lightbox-count"></small>
-    </div>
-  </div>
-</dialog>
 
 <script src="js/data/videos.js"></script>
 <script src="js/data/agents.js"></script>
 <script src="js/data/loading.js"></script>
 <script src="js/utils.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/transition.js"></script>
 <script src="js/i18n.js"></script>
 <script src="js/motion.js"></script>
 <script src="js/loading.js"></script>
-<script src="js/showcase.js"></script>
-<script src="js/agent-build.js"></script>
+<script src="js/home.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

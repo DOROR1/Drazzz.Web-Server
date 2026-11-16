@@ -2,8 +2,20 @@
    dan animasi "Now Loading" di pojok kanan bawah.
    Data: js/data/loading.js */
 
+/* true = layar loading hanya tampil di halaman pertama tiap kunjungan; halaman berikutnya langsung terbuka.
+   Ubah ke false bila ingin loading tampil di setiap halaman. */
+const LOADING_ONCE_PER_SESSION = true;
+
 (function () {
   const root = $('#loading');
+  let seen = false;
+  try {
+    seen = sessionStorage.getItem('drazzz-loading-seen') === '1';
+    sessionStorage.setItem('drazzz-loading-seen', '1');
+  } catch (error) { /* penyimpanan browser tidak tersedia: loading tampil seperti biasa */ }
+  if (LOADING_ONCE_PER_SESSION && seen) { root.remove(); return; }
+  document.documentElement.classList.remove('skip-loading');
+
   const pickRandom = (list) => list[Math.floor(Math.random() * list.length)];
   const tip = pickRandom(LOADING_TIPS);
 

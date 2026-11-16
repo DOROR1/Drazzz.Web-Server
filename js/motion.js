@@ -165,7 +165,7 @@ function enableTilt(container, selector, maxTilt = 6) {
 
 /* ---------- Mulai ---------- */
 initScrollEffects();
-enableTilt($('#video-grid'), '.video-card');
+if ($('#video-grid')) enableTilt($('#video-grid'), '.video-card');
 if (motionEnabled) {
   prepareText();
   revealItems($$('.two > *, .skills li, .steps li, .contact.panel, footer'));

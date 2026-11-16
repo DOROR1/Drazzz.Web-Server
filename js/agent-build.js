@@ -1,9 +1,8 @@
 /* Bagian Build agent: tab agent -> stat, W-Engine, dan 6 drive disc.
-   Memilih agent juga mengganti warna tema dan foto hero di bagian atas.
+   Memilih agent juga mengganti warna tema website.
    Data: js/data/agents.js */
 
 const ROMAN_SLOTS = ['I', 'II', 'III', 'IV', 'V', 'VI'];
-const slugify = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
 
 const imagePath = {
   avatar: (agent) => `assets/img/b/${agent.id}_av.webp`,
@@ -12,7 +11,6 @@ const imagePath = {
   setIcon: (setName) => `assets/img/b/set_${slugify(setName)}.webp`,
 };
 
-let currentHeroId = 'ellen';
 let currentAgentIndex = 0;
 
 /* 'M0W1' -> chip "M0" dan "W1" */
@@ -73,38 +71,17 @@ function skillRowHTML(agent) {
   return `<div class="skill-row">${cells}</div>`;
 }
 
-function applyTheme(agent) {
-  document.documentElement.style.setProperty('--accent', readableAccent(agent.color));
-}
-
-/* Foto hero ikut berganti dengan efek memudar */
-function swapHero(agent) {
-  if (agent.id === currentHeroId) return;
-  currentHeroId = agent.id;
-  const hero = $('#hero-art');
-  const preload = new Image();
-  preload.onload = () => {
-    if (currentHeroId !== agent.id) return;   /* agent sudah diganti lagi */
-    hero.style.opacity = 0;
-    setTimeout(() => {
-      hero.src = preload.src;
-      hero.alt = `Ilustrasi agent ${agent.name} dari Zenless Zone Zero`;
-      hero.style.opacity = 1;
-    }, 220);
-  };
-  preload.src = imagePath.hero(agent);
-}
-
 function showAgent(index) {
   const agent = AGENTS[index];
   currentAgentIndex = index;
   $$('.agent-tab').forEach((tab, i) => tab.setAttribute('aria-pressed', i === index));
-  applyTheme(agent);
-  swapHero(agent);
+  selectAgent(agent);
+  history.replaceState(null, '', '#' + agent.id);
 
   const view = $('#build-view');
   view.style.setProperty('--art', `url(${new URL(imagePath.hero(agent), document.baseURI).href})`);
   view.innerHTML = `
+    <div class="build-main">
     <div class="build-head">
       <div class="build-title"><h3>${agent.name}</h3><p class="faction">${agent.faction}</p></div>
       ${mindscapeChips(agent.mindscape)}
@@ -117,6 +94,7 @@ function showAgent(index) {
     ${skillRowHTML(agent)}
     <div class="effective">${effectiveHTML(agent)}</div>
     <div class="set-list">${setListHTML(agent)}</div>
+      </div>
     <div class="disc-grid">${agent.discs.map(discCardHTML).join('')}</div>`;
   revealChildren(view.querySelector('.stat-grid'));
   revealChildren(view.querySelector('.skill-row'));
@@ -136,5 +114,11 @@ $('#agent-tabs').addEventListener('click', (event) => {
   if (tab) showAgent(Number(tab.dataset.index));
 });
 
-showAgent(AGENTS.findIndex((agent) => agent.id === currentHeroId));
+/* Link seperti build.html#vivian langsung membuka agent-nya; bawaan: agent yang dipilih terakhir */
+const linked = AGENTS.findIndex((agent) => agent.id === location.hash.slice(1));
+addEventListener('hashchange', () => {
+  const index = AGENTS.findIndex((agent) => agent.id === location.hash.slice(1));
+  if (index >= 0 && index !== currentAgentIndex) showAgent(index);
+});
+showAgent(linked >= 0 ? linked : Math.max(0, AGENTS.findIndex((agent) => agent.id === savedAgent().id)));
 document.addEventListener('app-language-change', () => showAgent(currentAgentIndex));

@@ -1,13 +1,4 @@
-/* Navigasi aktif, jam live (WIB), dan gerak parallax foto hero */
-
-/* Tandai menu yang sesuai dengan bagian yang sedang dilihat */
-const navLinks = [...$$('.nav li a')];
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.filter((entry) => entry.isIntersecting).forEach((entry) => {
-    navLinks.forEach((link) => link.classList.toggle('on', link.getAttribute('href') === '#' + entry.target.id));
-  });
-}, { rootMargin: '-40% 0px -50% 0px' });
-$$('#home, #about, #showcase, #build, #proyek, #contact').forEach((section) => sectionObserver.observe(section));
+/* Jam live (WIB) di nav bawah dan gerak parallax foto hero (halaman Beranda) */
 
 /* Jam live di nav bawah (format ikut bahasa) */
 const clockOptions = {
@@ -21,20 +12,9 @@ updateClock();
 setInterval(updateClock, 1000);
 document.addEventListener('app-language-change', updateClock);
 
-/* Ringkasan di bawah tombol hero: jumlah video, agent, dan tanggal upload terbaru */
-function renderHeroStats() {
-  const total = SHOWCASE.reduce((sum, mode) => sum + mode.videos.length, 0);
-  const latest = latestUpload();
-  const stat = (value, label) => `<div><b>${value}</b><span>${label}</span></div>`;
-  $('#hero-stats').innerHTML = stat(total, t('statVideos')) + stat(AGENTS.length, t('statAgents'))
-    + (latest ? stat(formatDate(latest.date.slice(0, 10)), t('statLatest')) : '');
-}
-renderHeroStats();
-document.addEventListener('app-language-change', renderHeroStats);
-
 /* Foto hero bergeser pelan mengikuti kursor */
 const heroPanel = $('.art');
-if (!prefersReducedMotion) {
+if (heroPanel && !prefersReducedMotion) {
   heroPanel.addEventListener('pointermove', (event) => {
     const box = heroPanel.getBoundingClientRect();
     heroPanel.style.setProperty('--px', ((event.clientX - box.left) / box.width - 0.5) * -26 + 'px');

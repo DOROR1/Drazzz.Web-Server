@@ -20,7 +20,6 @@ const view = { modeIndex: 0, group: '', order: 'newest' };
 
 const thumbnailPath = (video) => 'assets/img/' + video.image;
 const videoCaption = (video) => video.title + (video.points ? ` · ${video.points} PTS` : '');
-const timeOf = (video) => (video.date ? new Date(video.date).getTime() : 0);   /* tanpa tanggal = paling lama */
 const scoreOf = (video) => parseFloat((/([\d.]+)\s*k/i.exec(video.points || '') || [])[1]) || 0;
 
 /* Video dengan skor tertinggi di sebuah kategori (untuk lencana TOP) */
@@ -127,6 +126,7 @@ function renderVideos() {
 function showMode(modeIndex) {
   view.modeIndex = modeIndex;
   view.group = '';
+  history.replaceState(null, '', '#' + slugify(SHOWCASE[modeIndex].name));
   renderModes();
   renderFilters();
   renderVideos();
@@ -208,11 +208,14 @@ function refreshShowcase() {
   if (lightbox.dialog.open) renderLightbox();
 }
 
-/* Video dengan tanggal upload paling baru (null bila belum ada tanggal) */
-function latestUpload() {
-  const dated = SHOWCASE.flatMap((mode) => mode.videos).filter((video) => video.date);
-  return dated.sort((a, b) => timeOf(b) - timeOf(a))[0] || null;
-}
+/* Link seperti showcase.html#deadly_assault langsung membuka kategorinya */
+const modeFromLink = SHOWCASE.findIndex((mode) => slugify(mode.name) === location.hash.slice(1));
+if (modeFromLink > 0) view.modeIndex = modeFromLink;
+
+addEventListener('hashchange', () => {
+  const index = SHOWCASE.findIndex((mode) => slugify(mode.name) === location.hash.slice(1));
+  if (index >= 0 && index !== view.modeIndex) showMode(index);
+});
 
 document.addEventListener('app-language-change', refreshShowcase);
 refreshShowcase();
